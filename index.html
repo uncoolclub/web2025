@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>📘 WEB2025 강의 목차</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h2>📘 주차 정리 목차</h2>
+    <div class="grid" id="chapter-grid"></div>
+
+    <h2>📁 프로젝트</h2>
+
+    <script>
+      const chapters = [
+        {
+          title: "00-1 웹 기초",
+          link: "./viewer.html?file=chapters/00/1.md",
+        },
+        {
+          title: "00-2 웹 프론트엔드",
+          link: "./viewer.html?file=chapters/00/2.md",
+        },
+        {
+          title: "01 자바스크립트 시작하기",
+          link: "./viewer.html?file=chapters/01/",
+        },
+        {
+          title: "02 프로그래밍의 기본, 변수와 자료형 살펴보기",
+          link: "./viewer.html?file=chapters/02/",
+        },
+        {
+          title: "03 연산자와 제어문",
+          link: "./viewer.html?file=chapters/03/",
+        },
+        {
+          title: "04 프로그래밍 한발 더 나가기, 함수와 스코프",
+          link: "./viewer.html?file=chapters/04/",
+        },
+        {
+          title: "05 DOM의 기초",
+          link: "./viewer.html?file=chapters/05/",
+        },
+        {
+          title: "06 이벤트와 이벤트 처리기",
+          link: "./viewer.html?file=chapters/06/",
+        },
+        {
+          title: "07 DOM 활용하기",
+          link: "./viewer.html?file=chapters/07/",
+        },
+        {
+          title: "08 자주 사용하는 내장 객체 알아보기",
+          link: "./viewer.html?file=chapters/08/",
+        },
+        {
+          title: "09 자바스크립트 객체 만들기",
+          link: "./viewer.html?file=chapters/09/",
+        },
+        {
+          title: "10 효율적으로 문자열과 배열 활용하기",
+          link: "./viewer.html?file=chapters/10/",
+        },
+        {
+          title: "11 배열과 객체, 좀 더 깊게 살펴보기",
+          link: "./viewer.html?file=chapters/11/",
+        },
+        {
+          title: "12 HTTP 통신과 JSON",
+          link: "./viewer.html?file=chapters/12/",
+        },
+        {
+          title: "13 비동기 프로그래밍",
+          link: "./viewer.html?file=chapters/13/",
+        },
+        {
+          title: "14 캔버스로 도형, 텍스트, 이미지 그리기",
+          link: "./viewer.html?file=chapters/14/",
+        },
+        {
+          title: "15 캔버스로 그래픽 요소 다루기",
+          link: "./viewer.html?file=chapters/15/",
+        },
+        {
+          title: "16 캔버스로 애니메이션 실행하기",
+          link: "./viewer.html?file=chapters/16/",
+        },
+        {
+          title: "17 웹 API 활용하기",
+          link: "./viewer.html?file=chapters/17/",
+        },
+        {
+          title: "18 공개 API 활용하기",
+          link: "./viewer.html?file=chapters/18/",
+        },
+      ];
+
+      const container = document.getElementById("chapter-grid");
+
+      chapters.forEach(({ title, link, label }) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = title;
+
+        const a = document.createElement("a");
+        a.href = link;
+        a.textContent = "👉 읽기";
+        a.target = "_blank";
+
+        card.appendChild(h3);
+        card.appendChild(a);
+        container.appendChild(card);
+      });
+    </script>
+  </body>
+</html>

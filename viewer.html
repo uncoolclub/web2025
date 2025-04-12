@@ -1,0 +1,43 @@
+<!-- viewer.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>📄 문서 보기</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        padding: 2rem;
+        max-width: 768px;
+        margin: auto;
+        line-height: 1.6;
+        background-color: #fff;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="content">불러오는 중...</div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const file = params.get("file");
+
+      if (file) {
+        fetch(file)
+          .then((res) => res.text())
+          .then((md) => {
+            document.getElementById("content").innerHTML = marked.parse(md);
+          })
+          .catch((err) => {
+            document.getElementById("content").innerHTML =
+              "문서를 불러올 수 없습니다.";
+            console.error(err);
+          });
+      } else {
+        document.getElementById("content").textContent =
+          "파일이 지정되지 않았습니다.";
+      }
+    </script>
+  </body>
+</html>
