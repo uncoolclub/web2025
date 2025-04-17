@@ -2,117 +2,308 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>📘 WEB2025 강의 목차</title>
+    <title>WEB2025 블로그</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h2>📘 주차 정리 목차</h2>
-    <div class="grid" id="chapter-grid"></div>
+    <header class="main-header">
+      <nav class="main-nav">
+        <a href="#" id="tab-posts" class="active">글</a>
+        <a href="#" id="tab-series">시리즈</a>
+        <a href="#" id="tab-about">소개</a>
+      </nav>
+    </header>
 
-    <h2>📁 프로젝트</h2>
+    <div class="tag-list" id="tag-list">
+      {/* 자바스크립트로 채워질 태그 버튼 영역 */}
+    </div>
+
+    <div class="post-list" id="post-list">
+      {/* 자바스크립트로 채워질 영역 */}
+    </div>
+
+    <div id="about-me" style="display: none; padding: 2rem">
+      <h2>소개</h2>
+      <p>
+        안녕하세요! 이 블로그는 WEB2025 강의 내용을 정리하고 프로젝트를 기록하는
+        공간입니다.
+      </p>
+      <p>여기에 자신에 대한 소개 내용을 자유롭게 작성해주세요.</p>
+      {/* 필요한 내용 추가 */}
+    </div>
 
     <script>
-      const chapters = [
+      const posts = [
         {
           title: "00-1 웹 기초",
           link: "./viewer.html?file=chapters/00/1.md",
+          snippet:
+            "웹의 기본적인 동작 원리와 HTML, CSS, JavaScript의 역할 소개...",
+          date: "2025년 3월 1일",
+          tags: ["웹기초", "HTML", "CSS"],
         },
         {
           title: "00-2 웹 프론트엔드",
           link: "./viewer.html?file=chapters/00/2.md",
+          snippet: "HTML5의 주요 특징과 웹소켓을 이용한 실시간 양방향 통신...",
+          date: "2025년 3월 5일",
+          tags: ["HTML5", "웹소켓", "프론트엔드"],
         },
         {
           title: "01 자바스크립트 시작하기",
           link: "./viewer.html?file=chapters/01/",
+          snippet:
+            "자바스크립트의 기본 문법과 개발 환경 설정 방법을 학습합니다. 콘솔 사용법과 기본적인 디버깅 방법을 익힙니다.",
+          date: "2025년 3월 10일",
+          tags: ["자바스크립트", "개발", "학습"],
         },
         {
           title: "02 프로그래밍의 기본, 변수와 자료형 살펴보기",
           link: "./viewer.html?file=chapters/02/",
+          snippet:
+            "프로그래밍의 기본 개념과 변수와 자료형에 대해 알아봅니다. 프로그래밍에서 변수와 자료형의 역할과 사용 방법을 배웁니다.",
+          date: "2025년 3월 15일",
+          tags: ["프로그래밍", "변수", "자료형"],
         },
         {
           title: "03 연산자와 제어문",
           link: "./viewer.html?file=chapters/03/",
+          snippet:
+            "연산자와 제어문에 대해 알아봅니다. 프로그래밍에서 사용되는 연산자와 제어문의 종류와 사용 방법을 배웁니다.",
+          date: "2025년 3월 20일",
+          tags: ["연산자", "제어문", "프로그래밍"],
         },
         {
           title: "04 프로그래밍 한발 더 나가기, 함수와 스코프",
           link: "./viewer.html?file=chapters/04/",
+          snippet:
+            "함수와 스코프에 대해 알아봅니다. 프로그래밍에서 함수와 스코프의 역할과 사용 방법을 배웁니다.",
+          date: "2025년 3월 25일",
+          tags: ["함수", "스코프", "프로그래밍"],
         },
         {
           title: "05 DOM의 기초",
           link: "./viewer.html?file=chapters/05/",
+          snippet:
+            "DOM의 기본 개념과 역할에 대해 알아봅니다. 웹 페이지의 구조와 스크립트를 통해 DOM을 다루는 방법을 배웁니다.",
+          date: "2025년 3월 30일",
+          tags: ["DOM", "웹", "스크립트"],
         },
         {
           title: "06 이벤트와 이벤트 처리기",
           link: "./viewer.html?file=chapters/06/",
+          snippet:
+            "이벤트와 이벤트 처리기에 대해 알아봅니다. 웹 페이지에서 발생하는 이벤트와 이벤트 처리기의 사용 방법을 배웁니다.",
+          date: "2025년 4월 5일",
+          tags: ["이벤트", "웹", "스크립트"],
         },
         {
           title: "07 DOM 활용하기",
           link: "./viewer.html?file=chapters/07/",
+          snippet:
+            "DOM을 활용하여 웹 페이지를 동적으로 변경하는 방법에 대해 알아봅니다. 스크립트를 통해 DOM을 조작하는 방법을 배웁니다.",
+          date: "2025년 4월 10일",
+          tags: ["DOM", "웹", "스크립트"],
         },
         {
           title: "08 자주 사용하는 내장 객체 알아보기",
           link: "./viewer.html?file=chapters/08/",
+          snippet:
+            "자주 사용하는 내장 객체에 대해 알아봅니다. JavaScript에서 제공하는 내장 객체의 종류와 사용 방법을 배웁니다.",
+          date: "2025년 4월 15일",
+          tags: ["내장객체", "JavaScript", "학습"],
         },
         {
           title: "09 자바스크립트 객체 만들기",
           link: "./viewer.html?file=chapters/09/",
+          snippet:
+            "자바스크립트에서 객체를 만드는 방법에 대해 알아봅니다. 객체의 생성과 프로퍼티 추가, 메소드 추가 방법을 배웁니다.",
+          date: "2025년 4월 20일",
+          tags: ["객체", "자바스크립트", "학습"],
         },
         {
           title: "10 효율적으로 문자열과 배열 활용하기",
           link: "./viewer.html?file=chapters/10/",
+          snippet:
+            "문자열과 배열을 효율적으로 활용하는 방법에 대해 알아봅니다. 문자열 조작과 배열의 사용 방법을 배웁니다.",
+          date: "2025년 4월 25일",
+          tags: ["문자열", "배열", "활용"],
         },
         {
           title: "11 배열과 객체, 좀 더 깊게 살펴보기",
           link: "./viewer.html?file=chapters/11/",
+          snippet:
+            "배열과 객체에 대해 더 깊게 살펴보고, 배열과 객체의 차이점과 사용 방법을 배웁니다.",
+          date: "2025년 5월 1일",
+          tags: ["배열", "객체", "학습"],
         },
         {
           title: "12 HTTP 통신과 JSON",
           link: "./viewer.html?file=chapters/12/",
+          snippet:
+            "HTTP 통신과 JSON에 대해 알아봅니다. 웹 페이지와 서버 간의 통신 방법과 JSON의 형식과 사용 방법을 배웁니다.",
+          date: "2025년 5월 5일",
+          tags: ["HTTP", "통신", "JSON"],
         },
         {
           title: "13 비동기 프로그래밍",
           link: "./viewer.html?file=chapters/13/",
+          snippet:
+            "비동기 프로그래밍에 대해 알아봅니다. 비동기 프로그래밍의 개념과 장단점, 그리고 사용 방법을 배웁니다.",
+          date: "2025년 5월 10일",
+          tags: ["비동기", "프로그래밍", "학습"],
         },
         {
           title: "14 캔버스로 도형, 텍스트, 이미지 그리기",
           link: "./viewer.html?file=chapters/14/",
+          snippet:
+            "캔버스를 활용하여 도형, 텍스트, 이미지를 그리는 방법에 대해 알아봅니다. 캔버스 API를 사용하여 그래픽을 그리는 방법을 배웁니다.",
+          date: "2025년 5월 15일",
+          tags: ["캔버스", "그래픽", "학습"],
         },
         {
           title: "15 캔버스로 그래픽 요소 다루기",
           link: "./viewer.html?file=chapters/15/",
+          snippet:
+            "캔버스를 활용하여 그래픽 요소를 다루는 방법에 대해 알아봅니다. 캔버스 API를 사용하여 그래픽을 다루는 방법을 배웁니다.",
+          date: "2025년 5월 20일",
+          tags: ["캔버스", "그래픽", "학습"],
         },
         {
           title: "16 캔버스로 애니메이션 실행하기",
           link: "./viewer.html?file=chapters/16/",
+          snippet:
+            "캔버스를 활용하여 애니메이션을 실행하는 방법에 대해 알아봅니다. 캔버스 API를 사용하여 애니메이션을 만드는 방법을 배웁니다.",
+          date: "2025년 5월 25일",
+          tags: ["캔버스", "애니메이션", "학습"],
         },
         {
           title: "17 웹 API 활용하기",
           link: "./viewer.html?file=chapters/17/",
+          snippet:
+            "웹 API에 대해 알아봅니다. 웹 API의 개념과 종류, 그리고 웹 API를 활용하여 웹 페이지를 개선하는 방법을 배웁니다.",
+          date: "2025년 6월 1일",
+          tags: ["웹 API", "학습", "개선"],
         },
         {
           title: "18 공개 API 활용하기",
           link: "./viewer.html?file=chapters/18/",
+          snippet:
+            "공개 API에 대해 알아봅니다. 공개 API의 개념과 종류, 그리고 공개 API를 활용하여 웹 페이지를 개선하는 방법을 배웁니다.",
+          date: "2025년 6월 5일",
+          tags: ["공개 API", "학습", "개선"],
         },
       ];
 
-      const container = document.getElementById("chapter-grid");
+      const postListContainer = document.getElementById("post-list");
+      const tagListContainer = document.getElementById("tag-list");
+      const aboutSection = document.getElementById("about-me");
+      const tabPosts = document.getElementById("tab-posts");
+      const tabSeries = document.getElementById("tab-series");
+      const tabAbout = document.getElementById("tab-about");
 
-      chapters.forEach(({ title, link, label }) => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const h3 = document.createElement("h3");
-        h3.textContent = title;
-
-        const a = document.createElement("a");
-        a.href = link;
-        a.textContent = "👉 읽기";
-        a.target = "_blank";
-
-        card.appendChild(h3);
-        card.appendChild(a);
-        container.appendChild(card);
+      let allTags = new Set();
+      posts.forEach((post) => {
+        post.tags.forEach((tag) => allTags.add(tag));
       });
+
+      function renderPosts(filterFn = () => true) {
+        postListContainer.innerHTML = "";
+        posts
+          .filter(filterFn)
+          .forEach(({ title, link, snippet, date, comments, likes, tags }) => {
+            const postItem = document.createElement("div");
+            postItem.className = "post-item";
+            postItem.onclick = () => {
+              if (link && link !== "#") window.open(link, "_blank");
+            };
+
+            const postTitle = document.createElement("h2");
+            postTitle.className = "post-title";
+            postTitle.textContent = title;
+
+            const postSnippet = document.createElement("p");
+            postSnippet.className = "post-snippet";
+            postSnippet.textContent = snippet;
+
+            const postMeta = document.createElement("div");
+            postMeta.className = "post-meta";
+            postMeta.textContent = `${date}`;
+
+            postItem.appendChild(postTitle);
+            postItem.appendChild(postSnippet);
+            postItem.appendChild(postMeta);
+            postListContainer.appendChild(postItem);
+          });
+      }
+
+      function renderTags() {
+        tagListContainer.innerHTML = "";
+
+        const allButton = document.createElement("button");
+        allButton.textContent = `전체보기 (${posts.length})`;
+        allButton.className = "active";
+        allButton.onclick = () => {
+          setActiveTag(allButton);
+          renderPosts();
+        };
+        tagListContainer.appendChild(allButton);
+
+        allTags.forEach((tag) => {
+          const button = document.createElement("button");
+          const count = posts.filter((p) => p.tags.includes(tag)).length;
+          button.textContent = `${tag} (${count})`;
+          button.onclick = () => {
+            setActiveTag(button);
+            renderPosts((post) => post.tags.includes(tag));
+          };
+          tagListContainer.appendChild(button);
+        });
+      }
+
+      function setActiveTag(activeButton) {
+        tagListContainer
+          .querySelectorAll("button")
+          .forEach((btn) => btn.classList.remove("active"));
+        activeButton.classList.add("active");
+      }
+
+      function setActiveTab(activeTab) {
+        [tabPosts, tabSeries, tabAbout].forEach((tab) =>
+          tab.classList.remove("active")
+        );
+        activeTab.classList.add("active");
+      }
+
+      tabPosts.onclick = (e) => {
+        e.preventDefault();
+        setActiveTab(tabPosts);
+        aboutSection.style.display = "none";
+        tagListContainer.style.display = "flex";
+        postListContainer.style.display = "block";
+        renderTags();
+        renderPosts();
+      };
+
+      tabSeries.onclick = (e) => {
+        e.preventDefault();
+        setActiveTab(tabSeries);
+        aboutSection.style.display = "none";
+        tagListContainer.style.display = "none";
+        postListContainer.style.display = "block";
+        renderPosts((post) => post.tags.includes("프로젝트"));
+      };
+
+      tabAbout.onclick = (e) => {
+        e.preventDefault();
+        setActiveTab(tabAbout);
+        postListContainer.style.display = "none";
+        tagListContainer.style.display = "none";
+        aboutSection.style.display = "block";
+      };
+
+      renderTags();
+      renderPosts();
     </script>
   </body>
 </html>
