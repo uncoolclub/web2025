@@ -1,0 +1,23 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+
+:root {
+  /* 색상 변수 */
+  --bg-color: hsl(230, 6%, 11%);
+  --text-color: #f0f0f0;
+  --secondary-text-color: hsla(0, 0%, 94%, 0.7);
+  --highlight-color: #3d6aff;
+  --border-color: hsla(0, 0%, 94%, 0.2);
+  --blockquote-bg: hsla(0, 0%, 94%, 0.05);
+  --code-bg: hsla(230, 6%, 15%, 1);
+
+  /* 목차 관련 변수 */
+  --toc-width: 220px;
+  --toc-bg: hsla(230, 6%, 13%, 1);
+  --toc-active-bg: hsla(230, 6%, 15%, 1);
+
+  /* 폰트 패밀리 */
+  --font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
+}

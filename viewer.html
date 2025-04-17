@@ -2,56 +2,40 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>📄 문서 보기</title>
+    <title>문서 보기</title>
+    <link rel="stylesheet" href="variables.css" />
     <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="markdown-styles.css" />
+    <link rel="stylesheet" href="viewer.css" />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>"
     />
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shiki@0.14.7/dist/index.unpkg.iife.js"></script>
   </head>
   <body>
-    <div id="content">불러오는 중...</div>
+    <div class="container">
+      <main class="main-content">
+        <div id="content" class="markdown-body">
+          <div
+            style="text-align: center; padding: 40px; color: var(--text-color)"
+          >
+            <div style="font-size: 24px; margin-bottom: 10px">
+              불러오는 중...
+            </div>
+            <div style="font-size: 14px; color: var(--secondary-text-color)">
+              문서를 준비하고 있습니다.
+            </div>
+          </div>
+        </div>
+      </main>
 
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const file = params.get("file");
-      const contentDiv = document.getElementById("content");
+      <aside class="toc-container" id="toc-container">
+        <h3 class="toc-title">📍 목차</h3>
+        <ul class="toc-list" id="toc-list"></ul>
+      </aside>
+    </div>
 
-      if (file) {
-        fetch(file)
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.text();
-          })
-          .then((md) => {
-            // 1. Parse Markdown to HTML
-            contentDiv.innerHTML = marked.parse(md);
-
-            // 2. Apply Syntax Highlighting AFTER content is in the DOM
-            // Ensure hljs is loaded before calling this
-            if (typeof hljs !== "undefined") {
-              // Tell highlight.js to find and highlight all code blocks
-              hljs.highlightAll();
-              // Or, more specifically:
-              // contentDiv.querySelectorAll('pre code').forEach((block) => {
-              //   hljs.highlightElement(block);
-              // });
-            } else {
-              console.warn("highlight.js not loaded.");
-            }
-          })
-          .catch((err) => {
-            contentDiv.innerHTML = `<p style="color: red;">문서를 불러올 수 없습니다: ${err.message}</p>`;
-            console.error(err);
-          });
-      } else {
-        contentDiv.textContent = "파일이 지정되지 않았습니다.";
-      }
-    </script>
+    <script type="module" src="viewer.js"></script>
   </body>
 </html>
