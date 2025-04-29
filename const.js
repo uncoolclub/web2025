@@ -25,7 +25,7 @@ export const POSTS = [
   },
   {
     title: "02 프로그래밍의 기본, 변수와 자료형 살펴보기",
-    link: "./viewer.html?file=chapters/02/",
+    link: "./viewer.html?file=chapters/02/1.md",
     snippet:
       "프로그래밍의 기본 개념과 변수와 자료형에 대해 알아봅니다. 프로그래밍에서 변수와 자료형의 역할과 사용 방법을 배웁니다.",
     date: "2025년 3월 16일 ~ 2025년 3월 31일",
@@ -33,7 +33,7 @@ export const POSTS = [
   },
   {
     title: "03 연산자와 제어문",
-    link: "./viewer.html?file=chapters/03/",
+    link: "./viewer.html?file=chapters/03/1.md",
     snippet:
       "연산자와 제어문에 대해 알아봅니다. 프로그래밍에서 사용되는 연산자와 제어문의 종류와 사용 방법을 배웁니다.",
     date: "2025년 3월 16일 ~ 2025년 3월 31일",
