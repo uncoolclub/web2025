@@ -17,7 +17,7 @@ export const POSTS = [
   },
   {
     title: "01 자바스크립트 시작하기",
-    link: "./viewer.html?file=chapters/01/",
+    link: "./viewer.html?file=chapters/01/1.md",
     snippet:
       "자바스크립트의 기본 문법과 개발 환경 설정 방법을 학습합니다. 콘솔 사용법과 기본적인 디버깅 방법을 익힙니다.",
     date: "2025년 3월 9일 ~ 2025년 3월 24일",
