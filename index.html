@@ -1,39 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <title>WEB2025</title>
-    <link rel="stylesheet" href="variables.css" />
-    <link rel="stylesheet" href="index.css" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛰️</text></svg>"
-    />
+    <meta http-equiv="refresh" content="0; url=src/viewer/index.html" />
+    <title>리다이렉션</title>
+    <script>
+      window.location.href = "src/viewer/index.html";
+    </script>
   </head>
   <body>
-    <header class="main-header">
-      <nav class="main-nav">
-        <a href="#" id="tab-posts" class="active">학습 내용</a>
-        <a href="#" id="tab-about">소개</a>
-      </nav>
-    </header>
-
-    <div class="tag-list" id="tag-list">
-      <!-- 자바스크립트로 채워질 태그 버튼 영역 -->
-    </div>
-
-    <div class="post-list" id="post-list">
-      <!-- 자바스크립트로 채워질 영역 -->
-    </div>
-
-    <div id="about-me" style="display: none; padding: 2rem">
-      <h2>소개</h2>
-    </div>
-
-    <script type="module">
-      import { POSTS } from "./const.js";
-      window.POSTS = POSTS;
-    </script>
-    <script type="module" src="index.js"></script>
+    <p>
+      이 페이지로 자동 이동합니다:
+      <a href="src/viewer/index.html">src/viewer/index.html</a>
+    </p>
   </body>
 </html>

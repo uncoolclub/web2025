@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WEB2025</title>
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛰️</text></svg>"
+    />
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="main-nav">
+        <a href="#" id="tab-posts" class="active">학습 내용</a>
+        <a href="#" id="tab-about">소개</a>
+      </nav>
+    </header>
+
+    <div class="tag-list" id="tag-list"></div>
+
+    <div class="post-list" id="post-list"></div>
+
+    <div id="about-me" style="display: none; padding: 2rem">
+      <h2>소개</h2>
+    </div>
+
+    <script type="module">
+      import { POSTS } from "./js/const.js";
+      window.POSTS = POSTS;
+    </script>
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>

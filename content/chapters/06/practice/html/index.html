@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이벤트 처리 예제 모음</title>
+    <style>
+      body {
+        font-family: "Pretendard", -apple-system, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f7;
+        color: #333;
+      }
+      h1 {
+        color: #3d6aff;
+        border-bottom: 2px solid #3d6aff;
+        padding-bottom: 10px;
+      }
+      .example-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+      .example-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+      }
+      .example-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+      .example-title {
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        color: #3d6aff;
+      }
+      .example-desc {
+        font-size: 0.9rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>이벤트 처리 예제 모음</h1>
+    <p>
+      6장 이벤트와 이벤트 처리기를 실습할 수 있는 다양한 예제입니다. 아래 카드를
+      클릭하여 각 예제로 이동하세요.
+    </p>
+
+    <div class="example-grid">
+      <div class="example-card" onclick="location.href='getForm.html'">
+        <div class="example-title">폼 데이터 가져오기</div>
+        <div class="example-desc">
+          폼 제출 이벤트를 처리하고 입력 데이터를 가져오는 예제입니다.
+        </div>
+      </div>
+
+      <div class="example-card" onclick="location.href='modal.html'">
+        <div class="example-title">모달 창</div>
+        <div class="example-desc">
+          버튼 클릭 시 모달 창을 표시하고 닫는 이벤트 처리 예제입니다.
+        </div>
+      </div>
+
+      <div class="example-card" onclick="location.href='carousel.html'">
+        <div class="example-title">이미지 캐러셀</div>
+        <div class="example-desc">이미지 슬라이드를 다루는 예제입니다.</div>
+      </div>
+
+      <div class="example-card" onclick="location.href='keycode.html'">
+        <div class="example-title">키보드 이벤트</div>
+        <div class="example-desc">키보드 이벤트를 처리하는 예제입니다.</div>
+      </div>
+
+      <div class="example-card" onclick="location.href='quiz-1.html'">
+        <div class="example-title">퀴즈 1</div>
+        <div class="example-desc">간단한 퀴즈 인터페이스 구현 예제입니다.</div>
+      </div>
+
+      <div class="example-card" onclick="location.href='quiz-2.html'">
+        <div class="example-title">퀴즈 2</div>
+        <div class="example-desc">
+          다중 선택 퀴즈 인터페이스 구현 예제입니다.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 페이지 로드 시 실행되는 이벤트 리스너
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("6장 이벤트 처리 예제 페이지가 로드되었습니다.");
+      });
+    </script>
+  </body>
+</html>

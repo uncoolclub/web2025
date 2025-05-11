@@ -21,6 +21,7 @@ body {
 .main-content {
   flex: 1;
   padding: 2rem;
+  margin-top: 2em;
   max-width: calc(100% - var(--toc-width));
 }
 
@@ -34,6 +35,26 @@ body {
   margin: 20px 0 20px 20px;
   overflow-y: auto;
   transition: transform 0.3s ease, opacity 0.3s ease;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: hsla(0, 0%, 100%, 0.15);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: hsla(0, 0%, 100%, 0.3);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0, 0%, 100%, 0.15) transparent;
 }
 
 .toc-title {
@@ -107,8 +128,6 @@ body {
 .markdown-body h5,
 .markdown-body h6 {
   font-weight: 800;
-  margin-top: 2em;
-  margin-bottom: 1em;
   color: var(--text-color);
 }
 

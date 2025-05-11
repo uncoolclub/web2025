@@ -2,11 +2,12 @@ const params = new URLSearchParams(window.location.search);
 const file = params.get("file");
 const contentDiv = document.getElementById("content");
 const tocList = document.getElementById("toc-list");
-const docList = document.getElementById("doc-list");
 const tocContainer = document.getElementById("toc-container");
 
 let highlighter;
 let md;
+
+import { setupExampleRunner } from "./code-runner.js";
 
 async function initShiki() {
   try {
@@ -276,8 +277,8 @@ async function loadMarkdown() {
         <div style="font-size: 24px; margin-bottom: 16px;">파일이 지정되지 않았습니다.</div>
         <div style="font-size: 16px; color: var(--secondary-text-color); margin-bottom: 24px;">URL에 ?file=경로/파일명.md 형식으로 파일을 지정해주세요.</div>
         <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px; align-items: center;">
-          <a href="?file=chapters/00/1.md" style="color: var(--highlight-color); background-color: rgba(61, 106, 255, 0.1); padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: 500;">웹의 3 요소</a>
-          <a href="?file=chapters/00/2.md" style="color: var(--highlight-color); background-color: rgba(61, 106, 255, 0.1); padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: 500;">웹 프론트엔드</a>
+          <a href="?file=00/1.md" style="color: var(--highlight-color); background-color: rgba(61, 106, 255, 0.1); padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: 500;">웹의 3 요소</a>
+          <a href="?file=00/2.md" style="color: var(--highlight-color); background-color: rgba(61, 106, 255, 0.1); padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: 500;">웹 프론트엔드</a>
         </div>
       </div>
     `;
@@ -292,7 +293,8 @@ async function loadMarkdown() {
       </div>
     `;
 
-    const response = await fetch(file);
+    const filePath = file.startsWith("/") ? file : `/content/chapters/${file}`;
+    const response = await fetch(filePath);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -301,6 +303,7 @@ async function loadMarkdown() {
 
     contentDiv.innerHTML = md.render(text);
 
+    setupExampleRunner(filePath, contentDiv);
     generateTableOfContents();
     highlightActiveLink();
     setupImageZoom();
@@ -357,14 +360,6 @@ function setupImageZoom() {
       e.stopPropagation();
     });
   });
-}
-
-function getFileTitle(filePath) {
-  if (!filePath) return "";
-
-  const fileName = filePath.split("/").pop().replace(".md", "");
-
-  return fileName;
 }
 
 async function init() {
