@@ -31,16 +31,26 @@ export function setupExampleRunner(filePath, contentDiv) {
 
   if (!chapterFolder) return;
 
+  // GitHub Pages 호스팅을 위한 기본 경로 설정
+  const isGitHubPages = window.location.hostname.includes("github.io");
+  let repoBase = "";
+  if (isGitHubPages) {
+    const pathSegments = window.location.pathname.split("/");
+    if (pathSegments.length >= 2) {
+      repoBase = "/" + pathSegments[1];
+    }
+  }
+
   // 챕터 경로에 있는 예제/실습 디렉토리 검사
   const exampleDirectories = [
     {
       name: "예제 코드",
-      path: `/content/chapters/${chapterFolder}/example`,
+      path: `${repoBase}/content/chapters/${chapterFolder}/example`,
       priority: 1,
     },
     {
       name: "실습 코드",
-      path: `/content/chapters/${chapterFolder}/practice`,
+      path: `${repoBase}/content/chapters/${chapterFolder}/practice`,
       priority: 2,
     },
   ];
@@ -73,8 +83,9 @@ export function setupExampleRunner(filePath, contentDiv) {
 
       if (examples.length > 0) {
         // 템플릿 로드 및 DOM에 추가
-        console.log("템플릿 로드 시도:", "./code-runner.html");
-        const templateResponse = await fetch("./code-runner.html");
+        const templatePath = `${repoBase}/src/viewer/code-runner.html`;
+        console.log("템플릿 로드 시도:", templatePath);
+        const templateResponse = await fetch(templatePath);
         console.log("템플릿 로드 결과:", templateResponse.ok);
         if (templateResponse.ok) {
           const templateHtml = await templateResponse.text();

@@ -293,7 +293,21 @@ async function loadMarkdown() {
       </div>
     `;
 
-    const filePath = file.startsWith("/") ? file : `/content/chapters/${file}`;
+    let filePath;
+    if (file.startsWith("/")) {
+      filePath = file;
+    } else {
+      const isGitHubPages = window.location.hostname.includes("github.io");
+      let repoBase = "";
+      if (isGitHubPages) {
+        const pathSegments = window.location.pathname.split("/");
+        if (pathSegments.length >= 2) {
+          repoBase = "/" + pathSegments[1];
+        }
+      }
+      filePath = `${repoBase}/content/chapters/${file}`;
+    }
+
     const response = await fetch(filePath);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
