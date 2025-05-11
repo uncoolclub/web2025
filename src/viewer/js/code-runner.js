@@ -331,7 +331,7 @@ function openExampleRunner(
   newTabButton
 ) {
   // 타이틀 설정
-  titleElement.textContent = `${title} 미리 보기`;
+  titleElement.textContent = `${title} | 미리 보기`;
 
   // iframe 소스 설정
   frame.src = path;
