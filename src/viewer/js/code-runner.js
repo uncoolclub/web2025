@@ -6,6 +6,8 @@
 export function setupExampleRunner(filePath, contentDiv) {
   if (!filePath) return;
 
+  console.log("✅ setupExampleRunner 호출됨: ", filePath);
+
   const pathParts = filePath.split("/");
   if (pathParts.length < 3) return;
 
@@ -26,8 +28,8 @@ export function setupExampleRunner(filePath, contentDiv) {
     }
   }
 
-  console.log("파일 경로:", filePath);
-  console.log("찾은 챕터:", chapterFolder);
+  console.log("📂 파일 경로:", filePath);
+  console.log("📁 찾은 챕터:", chapterFolder);
 
   if (!chapterFolder) return;
 
@@ -41,72 +43,188 @@ export function setupExampleRunner(filePath, contentDiv) {
     }
   }
 
-  // 챕터 경로에 있는 예제/실습 디렉토리 검사
-  const exampleDirectories = [
-    {
-      name: "예제 코드",
-      path: `${repoBase}/content/chapters/${chapterFolder}/example`,
-      priority: 1,
-    },
-    {
-      name: "실습 코드",
-      path: `${repoBase}/content/chapters/${chapterFolder}/practice`,
-      priority: 2,
-    },
-  ];
+  console.log("🌐 저장소 기본 경로:", repoBase);
+  console.log("📌 현재 URL:", window.location.href);
 
-  // 예제 디렉토리가 존재하는지 확인
-  Promise.all(
-    exampleDirectories.map((dir) =>
-      fetch(`${dir.path}/`)
-        .then((response) => {
-          console.log(`디렉토리 ${dir.path} 체크 결과:`, response.ok);
-          return { dir, exists: response.ok };
-        })
-        .catch((error) => {
-          console.error(`디렉토리 ${dir.path} 체크 오류:`, error);
-          return { dir, exists: false };
-        })
-    )
-  ).then(async (results) => {
-    // 존재하는 디렉토리만 필터링
-    const availableDirs = results
-      .filter((result) => result.exists)
-      .map((result) => result.dir);
+  // 챕터별 예제 폴더 경로 구성
+  const chapterBase = `${repoBase}/content/chapters/${chapterFolder}`;
+  const examplePath = `${chapterBase}/example`;
+  const practicePath = `${chapterBase}/practice`;
 
-    console.log("사용 가능한 디렉토리:", availableDirs);
+  console.log("📂 챕터 기본 경로:", chapterBase);
+  console.log("📂 예제 경로:", examplePath);
+  console.log("📂 실습 경로:", practicePath);
 
-    if (availableDirs.length > 0) {
-      // 예제 파일 목록 확인
-      const examples = await getExamples(availableDirs, chapterFolder);
-      console.log("찾은 예제:", examples);
-
+  findExamples(chapterFolder, examplePath, practicePath)
+    .then((examples) => {
       if (examples.length > 0) {
-        // 템플릿 로드 및 DOM에 추가
+        console.log("찾은 예제:", examples);
+
         const templatePath = `${repoBase}/src/viewer/code-runner.html`;
         console.log("템플릿 로드 시도:", templatePath);
-        const templateResponse = await fetch(templatePath);
-        console.log("템플릿 로드 결과:", templateResponse.ok);
-        if (templateResponse.ok) {
-          const templateHtml = await templateResponse.text();
-          const tempDiv = document.createElement("div");
-          tempDiv.innerHTML = templateHtml;
-          const exampleSection = tempDiv.firstElementChild;
 
-          // 예제 옵션 추가
-          populateExampleOptions(examples, exampleSection);
+        return fetch(templatePath)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`템플릿 로드 실패: ${response.status}`);
+            }
+            return response.text();
+          })
+          .then((templateHtml) => {
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = templateHtml;
+            const exampleSection = tempDiv.firstElementChild;
 
-          // 이벤트 리스너 설정
-          setupEventListeners(exampleSection);
+            populateExampleOptions(examples, exampleSection);
+            setupEventListeners(exampleSection);
+            contentDiv.appendChild(exampleSection);
+          });
+      } else {
+        console.log("예제를 찾을 수 없습니다.");
+      }
+    })
+    .catch((error) => {
+      console.error("예제 설정 중 오류 발생:", error);
+    });
+}
 
-          // 콘텐츠에 추가
-          contentDiv.appendChild(exampleSection);
-        } else {
-          console.error("예제 실행기 템플릿을 로드할 수 없습니다.");
+/**
+ * 챕터의 예제 파일들을 찾는 함수
+ * @param {string} chapterFolder - 챕터 폴더명
+ * @param {string} examplePath - 예제 폴더 경로
+ * @param {string} practicePath - 실습 폴더 경로
+ * @returns {Promise<Array>} 예제 파일 목록
+ */
+async function findExamples(chapterFolder, examplePath, practicePath) {
+  const examples = [];
+
+  try {
+    // 예제 폴더(example) 확인
+    const exampleIndexPath = `${examplePath}/index.html`;
+    console.log("예제 인덱스 확인:", exampleIndexPath);
+
+    try {
+      const exampleResponse = await fetch(exampleIndexPath);
+      if (exampleResponse.ok) {
+        const exampleText = await exampleResponse.text();
+        const exampleTitle = extractTitle(exampleText) || "기본 예제";
+
+        examples.push({
+          name: exampleTitle,
+          path: exampleIndexPath,
+          type: "example",
+          priority: 1,
+        });
+
+        console.log("예제 인덱스 파일 추가됨:", exampleTitle);
+      }
+    } catch (err) {
+      console.log("예제 폴더에 인덱스 파일 없음");
+    }
+
+    const practiceHtmlPath = `${practicePath}/html`;
+    console.log("실습 HTML 폴더 확인:", practiceHtmlPath);
+
+    const practiceIndexPath = `${practiceHtmlPath}/index.html`;
+    try {
+      const indexResponse = await fetch(practiceIndexPath);
+      if (indexResponse.ok) {
+        const indexText = await indexResponse.text();
+        const indexTitle = extractTitle(indexText) || "실습 예제 모음";
+
+        examples.push({
+          name: indexTitle,
+          path: practiceIndexPath,
+          type: "practice",
+          isIndex: true,
+          priority: 2,
+        });
+
+        console.log("실습 인덱스 파일 추가됨:", indexTitle);
+
+        const links = extractLinksFromHtml(indexText);
+        console.log("인덱스에서 발견된 링크:", links);
+
+        for (const linkHref of links) {
+          try {
+            // 상대 경로를 절대 경로로 변환
+            const fullPath = `${practiceHtmlPath}/${linkHref}`;
+
+            console.log("링크된 파일 확인:", fullPath);
+            const fileResponse = await fetch(fullPath);
+
+            if (fileResponse.ok) {
+              const fileText = await fileResponse.text();
+              const fileTitle =
+                extractTitle(fileText) || linkHref.replace(".html", "");
+
+              examples.push({
+                name: fileTitle,
+                path: fullPath,
+                type: "practice",
+                priority: 3,
+              });
+
+              console.log("링크된 실습 파일 추가됨:", fileTitle);
+            }
+          } catch (error) {
+            console.error(`${linkHref} 파일 확인 중 오류:`, error);
+          }
         }
       }
+    } catch (error) {
+      console.log("실습 폴더에 인덱스 파일 없음");
     }
-  });
+  } catch (error) {
+    console.error("예제 파일 찾기 중 오류:", error);
+  }
+
+  // 우선순위에 따라 정렬
+  examples.sort((a, b) => a.priority - b.priority);
+
+  return examples;
+}
+
+/**
+ * HTML 문자열에서 링크(href)를 추출하는 함수
+ * @param {string} htmlText - HTML 문자열
+ * @returns {Array<string>} 추출된 링크 목록
+ */
+function extractLinksFromHtml(htmlText) {
+  const links = [];
+  const locationHrefRegex = /location\.href\s*=\s*['"]([^'"]+)['"]/g;
+  const hrefRegex = /href\s*=\s*['"]([^'"]+)['"]/g;
+
+  // location.href 형태 찾기
+  let match;
+  while ((match = locationHrefRegex.exec(htmlText)) !== null) {
+    if (match[1].endsWith(".html") && !links.includes(match[1])) {
+      links.push(match[1]);
+    }
+  }
+
+  // href 속성 찾기
+  while ((match = hrefRegex.exec(htmlText)) !== null) {
+    if (
+      match[1].endsWith(".html") &&
+      !links.includes(match[1]) &&
+      !match[1].startsWith("http")
+    ) {
+      links.push(match[1]);
+    }
+  }
+
+  return links;
+}
+
+/**
+ * HTML 문자열에서 title 태그 내용을 추출하는 함수
+ * @param {string} htmlText - HTML 문자열
+ * @returns {string|null} 추출된 title 또는 null
+ */
+function extractTitle(htmlText) {
+  const titleMatch = htmlText.match(/<title[^>]*>([^<]+)<\/title>/i);
+  return titleMatch ? titleMatch[1].trim() : null;
 }
 
 /**
@@ -193,134 +311,6 @@ function setupEventListeners(sectionElement) {
     previewContainer.style.display = "none";
     previewFrame.src = "about:blank";
   });
-}
-
-/**
- * 챕터의 예제 파일 목록을 가져오는 함수
- * @param {Array} directories - 예제 디렉토리 목록
- * @param {string} chapterFolder - 챕터 폴더명
- * @returns {Promise<Array>} 예제 파일 목록
- */
-async function getExamples(directories, chapterFolder) {
-  const examples = [];
-
-  // 디렉토리 우선순위에 따라 정렬
-  directories.sort((a, b) => a.priority - b.priority);
-
-  for (const dir of directories) {
-    // example 디렉토리의 경우 index.html 파일이 있는지 확인
-    if (dir.path.endsWith("example")) {
-      try {
-        const response = await fetch(`${dir.path}/index.html`);
-        if (response.ok) {
-          const text = await response.text();
-          const title = extractTitle(text) || "기본 예제";
-
-          examples.push({
-            name: title,
-            path: `${dir.path}/index.html`,
-            type: "example",
-            priority: 1,
-          });
-        }
-      } catch (error) {
-        console.error("예제 파일 확인 중 오류:", error);
-      }
-    }
-
-    // practice 디렉토리의 경우 html 하위 디렉토리 확인
-    if (dir.path.endsWith("practice")) {
-      try {
-        const htmlPath = `${dir.path}/html`;
-        const response = await fetch(`${htmlPath}/`);
-
-        if (response.ok) {
-          // practice/html 디렉토리 내 예제 파일 목록 가져오기
-          // 참고: 실제로는 서버 측 스크립트를 통해 디렉토리 내용을 가져와야 함
-          // 여기서는 일부 고정 패턴의 파일만 확인
-
-          const commonExampleNames = [
-            "index.html",
-            "getForm.html",
-            "modal.html",
-            "carousel.html",
-            "keycode.html",
-            "quiz-1.html",
-            "quiz-2.html",
-          ];
-
-          // 메인 인덱스 파일 먼저 확인 (우선순위 높음)
-          const indexResponse = await fetch(`${htmlPath}/index.html`);
-          if (indexResponse.ok) {
-            const indexText = await indexResponse.text();
-            const indexTitle = extractTitle(indexText) || "모든 예제";
-
-            examples.push({
-              name: indexTitle,
-              path: `${htmlPath}/index.html`,
-              type: "practice",
-              isIndex: true,
-              priority: 2,
-            });
-          }
-
-          // 다른 예제 파일 확인
-          const fileChecks = await Promise.all(
-            commonExampleNames
-              .filter((name) => name !== "index.html") // 인덱스는 이미 처리함
-              .map(async (filename) => {
-                try {
-                  const fileResponse = await fetch(`${htmlPath}/${filename}`);
-                  if (fileResponse.ok) {
-                    const fileText = await fileResponse.text();
-                    const fileTitle =
-                      extractTitle(fileText) || filename.replace(".html", "");
-
-                    return {
-                      filename,
-                      exists: true,
-                      title: fileTitle,
-                    };
-                  }
-                  return { filename, exists: false };
-                } catch (error) {
-                  return { filename, exists: false };
-                }
-              })
-          );
-
-          // 존재하는 파일만 목록에 추가
-          fileChecks
-            .filter((file) => file.exists)
-            .forEach((file) => {
-              examples.push({
-                name: file.title,
-                path: `${htmlPath}/${file.filename}`,
-                type: "practice",
-                priority: 3,
-              });
-            });
-        }
-      } catch (error) {
-        console.error("practice 디렉토리 확인 중 오류:", error);
-      }
-    }
-  }
-
-  // 우선순위에 따라 정렬
-  examples.sort((a, b) => a.priority - b.priority);
-
-  return examples;
-}
-
-/**
- * HTML 문자열에서 title 태그 내용을 추출하는 함수
- * @param {string} htmlText - HTML 문자열
- * @returns {string|null} 추출된 title 또는 null
- */
-function extractTitle(htmlText) {
-  const titleMatch = htmlText.match(/<title[^>]*>([^<]+)<\/title>/i);
-  return titleMatch ? titleMatch[1].trim() : null;
 }
 
 /**
