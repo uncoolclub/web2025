@@ -1,0 +1,57 @@
+#container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+p {
+  font-size: 0.8rem;
+  line-height: 2;
+}
+
+#top {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+#top ul {
+  list-style: none;
+}
+
+li {
+  font-size: 1rem;
+  line-height: 2;
+}
+
+li > b {
+  width: 70px;
+  float: left;
+}
+
+#view {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}

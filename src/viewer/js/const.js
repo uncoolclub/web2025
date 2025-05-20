@@ -49,7 +49,7 @@ export const POSTS = [
   },
   {
     title: "05 DOM의 기초",
-    link: "./viewer.html?file=05/",
+    link: "./viewer.html?file=05/1.md",
     snippet:
       "DOM의 기본 개념과 역할에 대해 알아봅니다. 웹 페이지의 구조와 스크립트를 통해 DOM을 다루는 방법을 배웁니다.",
     date: "2025년 4월 5일 ~ 2025년 4월 14일",
