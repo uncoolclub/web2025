@@ -65,7 +65,7 @@ export const POSTS = [
   },
   {
     title: "07 DOM 활용하기",
-    link: "./viewer.html?file=07/",
+    link: "./viewer.html?file=07/index.md",
     snippet:
       "DOM을 활용하여 웹 페이지를 동적으로 변경하는 방법에 대해 알아봅니다. 스크립트를 통해 DOM을 조작하는 방법을 배웁니다.",
     date: "2025년 4월 6일 ~ 2025년 4월 21일",
