@@ -41,7 +41,7 @@ export const POSTS = [
   },
   {
     title: "04 프로그래밍 한발 더 나가기, 함수와 스코프",
-    link: "./viewer.html?file=04/",
+    link: "./viewer.html?file=04/1.md",
     snippet:
       "함수와 스코프에 대해 알아봅니다. 프로그래밍에서 함수와 스코프의 역할과 사용 방법을 배웁니다.",
     date: "2025년 3월 25일",
