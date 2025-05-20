@@ -8,6 +8,7 @@ let highlighter;
 let md;
 
 import { setupExampleRunner } from "./code-runner.js";
+import { getRepoBase } from "./utils.js";
 
 async function initShiki() {
   try {
@@ -297,14 +298,7 @@ async function loadMarkdown() {
     if (file.startsWith("/")) {
       filePath = file;
     } else {
-      const isGitHubPages = window.location.hostname.includes("github.io");
-      let repoBase = "";
-      if (isGitHubPages) {
-        const pathSegments = window.location.pathname.split("/");
-        if (pathSegments.length >= 2) {
-          repoBase = "/" + pathSegments[1];
-        }
-      }
+      const repoBase = getRepoBase();
       filePath = `${repoBase}/content/chapters/${file}`;
     }
 

@@ -1,3 +1,5 @@
+import { getRepoBase, fetchFileAsText } from "./utils.js";
+
 /**
  * 챕터 폴더 경로에서 예제 실행 섹션을 설정하는 함수
  * @param {string} filePath - 현재 마크다운 파일 경로
@@ -11,15 +13,13 @@ export function setupExampleRunner(filePath, contentDiv) {
   const pathParts = filePath.split("/");
   if (pathParts.length < 3) return;
 
-  // 파일 경로에서 챕터 번호 추출
   let chapterFolder = "";
 
-  // 경로 형식이 "/content/chapters/06/index.md" 또는 "06/index.md" 형태일 것으로 예상
   const chaptersIndex = pathParts.indexOf("chapters");
+
   if (chaptersIndex !== -1 && chaptersIndex + 1 < pathParts.length) {
     chapterFolder = pathParts[chaptersIndex + 1]; // chapters 다음 항목이 챕터 번호
   } else {
-    // chapters가 경로에 없으면 숫자로 된 부분을 찾음
     for (let i = 0; i < pathParts.length; i++) {
       if (/^\d+$/.test(pathParts[i])) {
         chapterFolder = pathParts[i];
@@ -34,19 +34,7 @@ export function setupExampleRunner(filePath, contentDiv) {
   if (!chapterFolder) return;
 
   // GitHub Pages 호스팅을 위한 기본 경로 설정
-  const isGitHubPages = window.location.hostname.includes("github.io");
-  let repoBase = "";
-  if (isGitHubPages) {
-    const pathSegments = window.location.pathname.split("/");
-    if (pathSegments.length >= 2) {
-      repoBase = "/" + pathSegments[1];
-    }
-  }
-
-  console.log("🌐 저장소 기본 경로:", repoBase);
-  console.log("📌 현재 URL:", window.location.href);
-
-  // 챕터별 예제 폴더 경로 구성
+  const repoBase = getRepoBase();
   const chapterBase = `${repoBase}/content/chapters/${chapterFolder}`;
   const examplePath = `${chapterBase}/example`;
   const practicePath = `${chapterBase}/practice`;
@@ -104,9 +92,8 @@ async function findExamples(chapterFolder, examplePath, practicePath) {
     console.log("예제 인덱스 확인:", exampleIndexPath);
 
     try {
-      const exampleResponse = await fetch(exampleIndexPath);
-      if (exampleResponse.ok) {
-        const exampleText = await exampleResponse.text();
+      const exampleText = await fetchFileAsText(exampleIndexPath);
+      if (exampleText) {
         const exampleTitle = extractTitle(exampleText) || "기본 예제";
 
         examples.push({
@@ -127,9 +114,8 @@ async function findExamples(chapterFolder, examplePath, practicePath) {
 
     const practiceIndexPath = `${practiceHtmlPath}/index.html`;
     try {
-      const indexResponse = await fetch(practiceIndexPath);
-      if (indexResponse.ok) {
-        const indexText = await indexResponse.text();
+      const indexText = await fetchFileAsText(practiceIndexPath);
+      if (indexText) {
         const indexTitle = extractTitle(indexText) || "실습 예제 모음";
 
         examples.push({
@@ -151,10 +137,9 @@ async function findExamples(chapterFolder, examplePath, practicePath) {
             const fullPath = `${practiceHtmlPath}/${linkHref}`;
 
             console.log("링크된 파일 확인:", fullPath);
-            const fileResponse = await fetch(fullPath);
+            const fileText = await fetchFileAsText(fullPath);
 
-            if (fileResponse.ok) {
-              const fileText = await fileResponse.text();
+            if (fileText) {
               const fileTitle =
                 extractTitle(fileText) || linkHref.replace(".html", "");
 
@@ -179,7 +164,6 @@ async function findExamples(chapterFolder, examplePath, practicePath) {
     console.error("예제 파일 찾기 중 오류:", error);
   }
 
-  // 우선순위에 따라 정렬
   examples.sort((a, b) => a.priority - b.priority);
 
   return examples;
@@ -233,7 +217,6 @@ function extractTitle(htmlText) {
  * @param {HTMLElement} sectionElement - 예제 섹션 요소
  */
 function populateExampleOptions(examples, sectionElement) {
-  // 예제 그룹 분류
   const exampleGroups = {
     example: {
       title: "기본 예제",
@@ -251,13 +234,11 @@ function populateExampleOptions(examples, sectionElement) {
 
   const selectBox = sectionElement.querySelector("#example-select");
 
-  // 각 그룹별로 옵션 그룹 추가
   Object.entries(exampleGroups).forEach(([groupKey, group]) => {
     if (group.items.length > 0) {
       const optGroup = document.createElement("optgroup");
       optGroup.label = group.title;
 
-      // 그룹 내 각 예제에 대한 옵션 추가
       group.items.forEach((example) => {
         const option = document.createElement("option");
         option.value = example.path;
@@ -286,12 +267,10 @@ function setupEventListeners(sectionElement) {
   const openInNewTab = sectionElement.querySelector("#example-new-tab");
   const closeButton = sectionElement.querySelector("#example-preview-close");
 
-  // 셀렉트 박스 변경 이벤트
   selectBox.addEventListener("change", () => {
     runButton.disabled = !selectBox.value;
   });
 
-  // 실행 버튼 클릭 이벤트
   runButton.addEventListener("click", () => {
     if (selectBox.value) {
       const selectedOption = selectBox.options[selectBox.selectedIndex];
@@ -306,7 +285,6 @@ function setupEventListeners(sectionElement) {
     }
   });
 
-  // 닫기 버튼 클릭 이벤트
   closeButton.addEventListener("click", () => {
     previewContainer.style.display = "none";
     previewFrame.src = "about:blank";
@@ -330,20 +308,13 @@ function openExampleRunner(
   frame,
   newTabButton
 ) {
-  // 타이틀 설정
   titleElement.textContent = `${title} | 미리 보기`;
-
-  // iframe 소스 설정
   frame.src = path;
 
-  // 새 탭에서 열기 버튼 업데이트
   newTabButton.onclick = () => {
     window.open(path, "_blank");
   };
 
-  // 미리보기 표시
   container.style.display = "block";
-
-  // 미리보기로 스크롤
   container.scrollIntoView({ behavior: "smooth" });
 }
