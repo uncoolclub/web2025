@@ -65,11 +65,3 @@ button.addEventListener("click", function (event) {
 - `event.preventDefault()`: 브라우저의 기본 동작 방지
 
 ## 실습 예제
-
-이 챕터에서는 다양한 이벤트 처리 예제를 통해 실습합니다:
-
-- 폼 데이터 처리
-- 모달 창 구현
-- 이미지 캐러셀
-- 키보드 이벤트 핸들링
-- 퀴즈 인터페이스 구현
