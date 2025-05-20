@@ -76,15 +76,15 @@ export const POSTS = [
     link: "./viewer.html?file=08/index.md",
     snippet:
       "자주 사용하는 내장 객체에 대해 알아봅니다. JavaScript에서 제공하는 내장 객체의 종류와 사용 방법을 배웁니다.",
-    date: "2025년 4월 22일 ~ 2025년 5월 5일",
+    date: "2025년 4월 28일 ~ 2025년 5월 5일",
     tags: ["8장", "객체"],
   },
   {
     title: "09 자바스크립트 객체 만들기",
-    link: "./viewer.html?file=09/",
+    link: "./viewer.html?file=09/index.md",
     snippet:
       "자바스크립트에서 객체를 만드는 방법에 대해 알아봅니다. 객체의 생성과 프로퍼티 추가, 메소드 추가 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 4일 ~ 2025년 5월 12일",
     tags: ["9장", "객체"],
   },
   {
