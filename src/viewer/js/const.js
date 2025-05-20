@@ -17,7 +17,7 @@ export const POSTS = [
   },
   {
     title: "01 자바스크립트 시작하기",
-    link: "./viewer.html?file=01/1.md",
+    link: "./viewer.html?file=01/index.md",
     snippet:
       "자바스크립트의 기본 문법과 개발 환경 설정 방법을 학습합니다. 콘솔 사용법과 기본적인 디버깅 방법을 익힙니다.",
     date: "2025년 3월 9일 ~ 2025년 3월 24일",
@@ -25,7 +25,7 @@ export const POSTS = [
   },
   {
     title: "02 프로그래밍의 기본, 변수와 자료형 살펴보기",
-    link: "./viewer.html?file=02/1.md",
+    link: "./viewer.html?file=02/index.md",
     snippet:
       "프로그래밍의 기본 개념과 변수와 자료형에 대해 알아봅니다. 프로그래밍에서 변수와 자료형의 역할과 사용 방법을 배웁니다.",
     date: "2025년 3월 16일 ~ 2025년 3월 31일",
@@ -33,7 +33,7 @@ export const POSTS = [
   },
   {
     title: "03 연산자와 제어문",
-    link: "./viewer.html?file=03/1.md",
+    link: "./viewer.html?file=03/index.md",
     snippet:
       "연산자와 제어문에 대해 알아봅니다. 프로그래밍에서 사용되는 연산자와 제어문의 종류와 사용 방법을 배웁니다.",
     date: "2025년 3월 16일 ~ 2025년 3월 31일",
@@ -41,7 +41,7 @@ export const POSTS = [
   },
   {
     title: "04 프로그래밍 한발 더 나가기, 함수와 스코프",
-    link: "./viewer.html?file=04/1.md",
+    link: "./viewer.html?file=04/index.md",
     snippet:
       "함수와 스코프에 대해 알아봅니다. 프로그래밍에서 함수와 스코프의 역할과 사용 방법을 배웁니다.",
     date: "2025년 3월 25일",
@@ -49,7 +49,7 @@ export const POSTS = [
   },
   {
     title: "05 DOM의 기초",
-    link: "./viewer.html?file=05/1.md",
+    link: "./viewer.html?file=05/index.md",
     snippet:
       "DOM의 기본 개념과 역할에 대해 알아봅니다. 웹 페이지의 구조와 스크립트를 통해 DOM을 다루는 방법을 배웁니다.",
     date: "2025년 4월 5일 ~ 2025년 4월 14일",
@@ -73,10 +73,10 @@ export const POSTS = [
   },
   {
     title: "08 자주 사용하는 내장 객체 알아보기",
-    link: "./viewer.html?file=08/",
+    link: "./viewer.html?file=08/index.md",
     snippet:
       "자주 사용하는 내장 객체에 대해 알아봅니다. JavaScript에서 제공하는 내장 객체의 종류와 사용 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 4월 22일 ~ 2025년 5월 5일",
     tags: ["8장", "객체"],
   },
   {
