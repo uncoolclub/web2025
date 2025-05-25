@@ -1,4 +1,4 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/static/split/WantedSans.min.css");
 
 :root {
   /* 색상 변수 */
@@ -10,14 +10,20 @@
   --blockquote-bg: hsla(0, 0%, 94%, 0.05);
   --code-bg: hsla(230, 6%, 15%, 1);
 
+  --bg-primary: #0b0a0d;
+  --bg-secondary: #252329;
+  --bg-tertiary: #1e1c21;
+  --text-white: #fcfaff;
+  --text-gray: #d2ced9;
+  --text-black: #0b0a0d;
+
   /* 목차 관련 변수 */
   --toc-width: 280px;
   --toc-bg: hsla(230, 6%, 13%, 1);
   --toc-active-bg: hsla(230, 6%, 15%, 1);
 
-  /* 폰트 패밀리 */
-  --font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
-    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    sans-serif;
+  font-family: "Wanted Sans Variable", "Wanted Sans", -apple-system,
+    BlinkMacSystemFont, system-ui, "Segoe UI", "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", sans-serif;
 }

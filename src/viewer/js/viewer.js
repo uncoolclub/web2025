@@ -299,7 +299,7 @@ async function loadMarkdown() {
       filePath = file;
     } else {
       const repoBase = getRepoBase();
-      filePath = `${repoBase}/content/chapters/${file}`;
+      filePath = `${repoBase}/src/chapters/${file}`;
     }
 
     const response = await fetch(filePath);

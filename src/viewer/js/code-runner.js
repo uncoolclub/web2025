@@ -35,7 +35,7 @@ export function setupExampleRunner(filePath, contentDiv) {
 
   // GitHub Pages 호스팅을 위한 기본 경로 설정
   const repoBase = getRepoBase();
-  const chapterBase = `${repoBase}/content/chapters/${chapterFolder}`;
+  const chapterBase = `${repoBase}/src/chapters/${chapterFolder}`;
   const examplePath = `${chapterBase}/example`;
   const practicePath = `${chapterBase}/practice`;
 
