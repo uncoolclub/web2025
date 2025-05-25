@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05장 DOM의 기초 - 예제 모음</title>
+    <link rel="stylesheet" href="/common/css/practice.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a
+        href="#"
+        class="back-btn"
+        onclick="if(window.parent && window.parent.closeMarkdownViewer) { window.parent.closeMarkdownViewer(); return false; } else { window.location.href='../../../posts/'; }"
+        >← Back to List</a
+      >
+
+      <h1 class="content-title">05장 DOM의 기초 - 예제 모음</h1>
+      <p class="content-subtitle">
+        🚀 목표 - 실습을 통해 DOM 조작 방법을 익히기
+      </p>
+    </div>
+
+    <div class="post-list">
+      <div
+        class="post-item"
+        onclick="window.open('./html/darkmode.html', '_blank')"
+      >
+        <div class="post-meta">예제 01 • DOM 조작</div>
+        <div class="post-title">다크 모드 토글</div>
+        <div class="post-description">
+          classList의 toggle 메서드를 사용하여 페이지의 테마를 다크 모드로
+          전환하는 방법을 학습
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/getForm.html', '_blank')"
+      >
+        <div class="post-meta">예제 02 • 폼 처리</div>
+        <div class="post-title">수강 신청 폼</div>
+        <div class="post-description">
+          form 요소의 이벤트 처리와 사용자 입력 데이터를 받아오는 방법을 실습
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/js-content-2.html', '_blank')"
+      >
+        <div class="post-meta">예제 03 • 요소 선택</div>
+        <div class="post-title">웹 요소 접근하기</div>
+        <div class="post-description">
+          document.querySelector 메서드를 사용하여 HTML 요소에 접근하고 조작하는
+          기본 방법을 배움
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/quiz-1.html', '_blank')"
+      >
+        <div class="post-meta">연습 문제 01 • 기초</div>
+        <div class="post-title">연습 문제 1</div>
+        <div class="post-description">
+          기본적인 연습 문제를 통해 실력을 점검해보세요.
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/quiz-2.html', '_blank')"
+      >
+        <div class="post-meta">연습 문제 02 • 심화</div>
+        <div class="post-title">연습 문제 2</div>
+        <div class="post-description">
+          좀 더 심화된 DOM 조작 기법을 활용한 연습 문제로 실력을 향상
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

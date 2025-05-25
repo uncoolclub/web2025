@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06장 이벤트와 이벤트 처리기 - 예제 모음</title>
+    <link rel="stylesheet" href="/common/css/practice.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a
+        href="#"
+        class="back-btn"
+        lang="en"
+        onclick="if(window.parent && window.parent.closeMarkdownViewer) { window.parent.closeMarkdownViewer(); return false; } else { window.location.href='../../../posts/'; }"
+        >← Back to List</a
+      >
+
+      <h1 class="content-title">06장 이벤트와 이벤트 처리기 - 예제 모음</h1>
+      <p class="content-subtitle">
+        🚀 목표 - 실습을 통해 이벤트 처리 방법을 익히기
+      </p>
+    </div>
+
+    <div class="post-list">
+      <div
+        class="post-item"
+        onclick="window.open('./html/getForm.html', '_blank')"
+      >
+        <div class="post-meta">예제 01 • 폼 처리</div>
+        <div class="post-title">폼 데이터 가져오기</div>
+        <div class="post-description">
+          폼 제출 이벤트를 처리하고 입력 데이터를 가져오는 방법을 실습
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/modal.html', '_blank')"
+      >
+        <div class="post-meta">예제 02 • 모달 창</div>
+        <div class="post-title">모달 창 제어</div>
+        <div class="post-description">
+          버튼 클릭 이벤트로 모달 창을 표시하고 닫는 기능을 구현
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/carousel.html', '_blank')"
+      >
+        <div class="post-meta">예제 03 • 이미지 슬라이드</div>
+        <div class="post-title">이미지 캐러셀</div>
+        <div class="post-description">
+          클릭 이벤트를 활용하여 이미지 슬라이드 기능을 구현하는 방법을 학습
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/keycode.html', '_blank')"
+      >
+        <div class="post-meta">예제 04 • 키보드 이벤트</div>
+        <div class="post-title">키보드 이벤트 처리</div>
+        <div class="post-description">
+          키보드 입력 이벤트를 감지하고 처리하는 다양한 방법을 실습
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/quiz-1.html', '_blank')"
+      >
+        <div class="post-meta">연습 문제 01 • 기초</div>
+        <div class="post-title">연습 문제 1</div>
+        <div class="post-description">
+          간단한 퀴즈 인터페이스를 구현하며 이벤트 처리 기초를 점검
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/quiz-2.html', '_blank')"
+      >
+        <div class="post-meta">연습 문제 02 • 심화</div>
+        <div class="post-title">연습 문제 2</div>
+        <div class="post-description">
+          다중 선택 퀴즈 인터페이스를 구현하며 복합 이벤트 처리 기법을 학습
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

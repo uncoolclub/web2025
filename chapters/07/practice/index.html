@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07장 DOM 활용하기 - 예제 모음</title>
+    <link rel="stylesheet" href="/common/css/practice.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a
+        href="#"
+        class="back-btn"
+        lang="en"
+        onclick="if(window.parent && window.parent.closeMarkdownViewer) { window.parent.closeMarkdownViewer(); return false; } else { window.location.href='../../../posts/'; }"
+        >← Back to List</a
+      >
+
+      <h1 class="content-title">07장 DOM 활용하기 - 예제 모음</h1>
+      <p class="content-subtitle">
+        🚀 목표 - 실습을 통해 DOM 활용 방법을 익히기
+      </p>
+    </div>
+
+    <div class="post-list">
+      <div
+        class="post-item"
+        onclick="window.open('./html/bookList.html', '_blank')"
+      >
+        <div class="post-meta">예제 01 • 동적 목록</div>
+        <div class="post-title">책 목록 만들기</div>
+        <div class="post-description">
+          DOM을 활용하여 동적으로 책 목록을 생성하고 삭제하는 방법을 실습
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/time.html', '_blank')"
+      >
+        <div class="post-meta">예제 02 • 시간 기반 제어</div>
+        <div class="post-title">현재 시간에 따라 이미지 변경하기</div>
+        <div class="post-description">
+          Date 객체와 DOM 조작을 결합하여 시간에 따라 이미지를 동적으로 변경
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/quiz-1.html', '_blank')"
+      >
+        <div class="post-meta">연습 문제 01 • 기초</div>
+        <div class="post-title">연습 문제 1</div>
+        <div class="post-description">
+          참가자 명단을 동적으로 생성하고 관리하는 기능을 구현하며 DOM 활용
+          기초를 점검
+        </div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('./html/quiz-2.html', '_blank')"
+      >
+        <div class="post-meta">연습 문제 02 • 심화</div>
+        <div class="post-title">연습 문제 2</div>
+        <div class="post-description">
+          알림 기능을 구현하며 DOM 조작과 이벤트 처리를 종합적으로 활용
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

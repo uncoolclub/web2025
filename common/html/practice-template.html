@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{CHAPTER_NUMBER}장 {CHAPTER_TITLE} - 예제 실습</title>
+    <link rel="stylesheet" href="../../../common/css/practice.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a
+        href="#"
+        class="back-btn"
+        lang="en"
+        onclick="if(window.parent && window.parent.closeMarkdownViewer) { window.parent.closeMarkdownViewer(); return false; } else { window.location.href='../../../posts/'; }"
+        >← Back to List</a
+      >
+
+      <h1 class="content-title">
+        {CHAPTER_NUMBER}장 {CHAPTER_TITLE} - 예제 실습
+      </h1>
+      <p class="content-subtitle">{CHAPTER_DESCRIPTION}</p>
+    </div>
+
+    <div class="post-list">
+      <div
+        class="post-item"
+        onclick="window.open('html/{EXAMPLE_FILE}.html', '_blank')"
+      >
+        <div class="post-meta">예제 {EXAMPLE_NUMBER} • {EXAMPLE_CATEGORY}</div>
+        <div class="post-title">{EXAMPLE_TITLE}</div>
+        <div class="post-description">{EXAMPLE_DESCRIPTION}</div>
+      </div>
+
+      <div
+        class="post-item"
+        onclick="window.open('html/{QUIZ_FILE}.html', '_blank')"
+      >
+        <div class="post-meta">연습 문제 {QUIZ_NUMBER} • {QUIZ_LEVEL}</div>
+        <div class="post-title">{QUIZ_TITLE}</div>
+        <div class="post-description">{QUIZ_DESCRIPTION}</div>
+      </div>
+    </div>
+  </body>
+</html>
