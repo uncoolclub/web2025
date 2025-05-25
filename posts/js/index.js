@@ -151,7 +151,7 @@ function renderChapterList() {
 }
 
 function handleChapterSelect(chapter) {
-  if (currentView === "viewer") {
+  if (currentView === "posts") {
     closeMarkdownViewer();
   }
 
@@ -227,7 +227,7 @@ function renderPosts(filterFn = () => true, selectedChapter = null) {
 
 async function loadPracticeContent(link) {
   try {
-    currentView = "viewer";
+    currentView = "posts";
     postListContainer.style.display = "none";
     markdownViewer.style.display = "block";
 
@@ -289,7 +289,7 @@ async function loadMarkdownContent(link) {
   }
 
   try {
-    currentView = "viewer";
+    currentView = "posts";
     postListContainer.style.display = "none";
     markdownViewer.style.display = "block";
 
@@ -298,7 +298,7 @@ async function loadMarkdownContent(link) {
     showLoading();
 
     let filePath;
-    if (link.includes("viewer.html?file=")) {
+    if (link.includes("posts.html?file=")) {
       const fileName = link.split("file=")[1];
       filePath = `../chapters/${fileName}`;
     } else {
@@ -386,7 +386,7 @@ backBtn.addEventListener("click", closeMarkdownViewer);
 chapterFilter.addEventListener("change", (e) => {
   const selectedChapter = e.target.value;
 
-  if (currentView === "viewer") {
+  if (currentView === "posts") {
     closeMarkdownViewer();
   }
 
