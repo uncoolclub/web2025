@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Genre Selection</title>
+    <link rel="stylesheet" href="../variables.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <main class="main-container">
+      <section class="main-section">
+        <div class="title-container">
+          <h1 class="title">
+            <span class="title-line"
+              ><span class="text border-text">Choose</span>
+              <span class="text">Your</span>
+              <span class="accent-arrow">→</span>
+            </span>
+
+            <span class="title-line">🥁 <span class="text">Music</span></span>
+            <span class="title-line"
+              ><span class="text">Genre</span>
+              <span class="text border-text">Now</span>
+            </span>
+          </h1>
+        </div>
+        <div class="scroll-indicator">
+          <span class="scroll-text">Scroll</span>
+          <div class="scroll-arrow">↓</div>
+        </div>
+      </section>
+
+      <section class="genre-section">
+        <div class="genre-container">
+          <div class="genre-grid"></div>
+        </div>
+      </section>
+
+      <template id="genre-template">
+        <div class="genre-item">
+          <div class="genre-content">
+            <span class="genre-icon"></span>
+            <h4></h4>
+            <p></p>
+          </div>
+        </div>
+      </template>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
