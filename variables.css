@@ -9,10 +9,20 @@
   --medium-gray: #e5e5e5;
   --dark-gray: #d0d0d0;
   --text-gray: #666666;
+
+  /* Theme Colors */
+  --background: var(--primary-white);
+  --background-alt: var(--light-gray);
+  --text-color: var(--primary-black);
+  --text-color-secondary: var(--text-gray);
+  --accent-color: #ff6b00;
+
+  /* Border */
   --border-color: var(--primary-black);
+  --border-width: 1px;
 
   /* Fonts */
-  --font-primary: "Geist Mono", "Wanted Sans Variable", "Wanted Sans",
+  --font-primary: "Wanted Sans Variable", "Wanted Sans", "Geist Mono",
     -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-korean: "Wanted Sans Variable", "Wanted Sans", "Apple SD Gothic Neo",
@@ -27,6 +37,7 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-black: 900;
 
   /* Spacing */
   --spacing-xs: 8px;
@@ -41,8 +52,6 @@
 
   --transition-fast: 0.2s ease;
   --transition-medium: 0.3s ease;
-  --border-width: 1px;
-  --border-color: var(--primary-black);
 
   font-family: var(--font-primary);
 }
