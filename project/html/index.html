@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muzly</title>
+    <link rel="stylesheet" href="../../variables.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="page-header">
+        <button
+          class="back-button"
+          aria-label="이전으로"
+          onclick="window.location.href='/'"
+        >
+          <img
+            src="../assets/images/ic_prev.png"
+            alt="back-icon"
+            class="back-icon"
+          />
+        </button>
+        <span class="header-title">🎸 Muzly 🥁</span>
+      </header>
+
+      <section class="avatar-display-section">
+        <div class="main-avatar-container">
+          <div class="avatar-mood-title"></div>
+          <img id="main-avatar-image" class="main-avatar" />
+          <div class="avatar-mood-label"></div>
+        </div>
+      </section>
+
+      <section class="mood-selection-section">
+        <div class="mood-color-grid"></div>
+      </section>
+
+      <footer class="navigation-footer">
+        <button class="next-button" id="next-button">다음으로</button>
+      </footer>
+    </div>
+
+    <script type="module" src="../js/index.js"></script>
+  </body>
+</html>

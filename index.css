@@ -117,11 +117,10 @@ body {
 
 .expandable-title {
   font-size: 18px;
-  font-weight: 600;
   color: var(--primary-black);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  font-family: var(--font-english);
+  font-family: var(--font-korean);
 }
 
 .expandable-icon {

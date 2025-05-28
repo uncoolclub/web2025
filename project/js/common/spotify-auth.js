@@ -53,13 +53,16 @@ class SpotifyAuth {
       const params = new URLSearchParams();
       params.append("grant_type", "refresh_token");
       params.append("refresh_token", this.refreshToken);
-      params.append("client_id", this.clientId);
+
+      // Basic 인증을 위한 Base64 인코딩
+      const credentials = btoa(`${this.clientId}:${this.clientSecret}`);
 
       const response = await Http.post(
         "https://accounts.spotify.com/api/token",
         params,
         {
           "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Basic ${credentials}`,
         }
       );
 

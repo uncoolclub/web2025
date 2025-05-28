@@ -1,4 +1,5 @@
-@import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/static/split/WantedSans.min.css");
+@import url("https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-face.css");
+@import url("https://cdn.jsdelivr.net/gh/ungveloper/web-fonts/GmarketSans/font-family.css");
 @import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap");
 
 :root {
@@ -9,31 +10,31 @@
   --medium-gray: #e5e5e5;
   --dark-gray: #d0d0d0;
   --text-gray: #666666;
+  --blue: #007aff;
 
   /* Theme Colors */
   --background: var(--primary-white);
   --background-alt: var(--light-gray);
   --text-color: var(--primary-black);
   --text-color-secondary: var(--text-gray);
-  --accent-color: #ff6b00;
 
   /* Border */
   --border-color: var(--primary-black);
   --border-width: 1px;
 
   /* Fonts */
-  --font-primary: "Wanted Sans Variable", "Wanted Sans", "Geist Mono",
-    -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  --font-korean: "Wanted Sans Variable", "Wanted Sans", "Apple SD Gothic Neo",
-    "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-primary: "GmarketSans", "Geist Mono", -apple-system, BlinkMacSystemFont,
+    system-ui, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
+  --font-korean: "GmarketSans", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
   --font-english: "Geist Mono", -apple-system, BlinkMacSystemFont, system-ui,
     "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
     Consolas, "Courier New", monospace;
 
   /* Font Weights */
-  --font-weight-regular: 400;
+  --font-weight-regular: 300;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
@@ -49,9 +50,13 @@
   --header-height: 80px;
   --sidebar-width: 400px;
   --max-width: 1400px;
+  --mobile-max-width: 720px;
 
   --transition-fast: 0.2s ease;
   --transition-medium: 0.3s ease;
 
-  font-family: var(--font-primary);
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 50%;
 }
