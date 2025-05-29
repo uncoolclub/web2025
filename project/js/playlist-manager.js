@@ -156,7 +156,7 @@ export class PlaylistManager {
 
       if (!response || response.length === 0) {
         this.grid.innerHTML =
-          '<div class="error-message">추천 음악이 없습니다.</div>';
+          '<div class="error-message">추천 음악이 없습니다. 😅</div>';
         return;
       }
 
@@ -175,6 +175,13 @@ export class PlaylistManager {
       }
     } catch (error) {
       console.error("Failed to load tracks: ", error);
+
+      if (error.message.includes("403")) {
+        this.grid.innerHTML =
+          '<div class="error-message">일일 Youtube API 사용량을 초과했습니다.<br/>내일 다시 시도해 주세요. 🥺</div>';
+        return;
+      }
+
       this.grid.innerHTML =
         '<div class="error-message">음악을 불러오지 못했습니다.</div>';
     }
