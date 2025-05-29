@@ -32,7 +32,7 @@ export const MOOD = {
     label: "딱히 좋지도 나쁘지도 않아.\n그냥 그런 날이야.",
     emoji: "😐",
     avatar: "../assets/images/geojye-geurae.png",
-    genre: "아이돌 ",
+    genre: "신나는 아이돌 노래",
   },
   "wanbeop-johae": {
     mood: "완벽해!",

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎵 Muzly - 재생 중</title>
+    <link rel="stylesheet" href="../../variables.css" />
+    <link rel="stylesheet" href="../css/player.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="player-section-wrapper">
+        <section class="player-section">
+          <div class="player-header">
+            <button
+              class="back-button"
+              aria-label="이전으로"
+              onclick="window.history.back()"
+            >
+              <img
+                src="../assets/images/ic_prev.png"
+                alt="back-icon"
+                class="back-icon"
+              />
+            </button>
+            <div class="player-title">현재 재생 중</div>
+          </div>
+
+          <div class="player-content">
+            <div class="player-thumbnail">
+              <div id="player"></div>
+              <img src="" alt="썸네일" id="player-thumbnail" />
+            </div>
+            <div class="player-info">
+              <div class="player-video-title"></div>
+              <div class="player-channel"></div>
+            </div>
+            <div class="player-controls">
+              <div class="progress-bar">
+                <div class="progress"></div>
+                <div class="progress-handle"></div>
+              </div>
+              <div class="time-info">
+                <span class="current-time">0:00</span>
+                <span class="total-time">0:00</span>
+              </div>
+              <div class="control-buttons">
+                <button class="control-button" id="prev-button">
+                  <img src="../assets/svgs/ic_fast_rewind.svg" alt="이전" />
+                </button>
+                <button class="control-button play-button" id="play-button">
+                  <img src="../assets/svgs/ic_play.svg" alt="재생" />
+                </button>
+                <button class="control-button" id="next-button">
+                  <img src="../assets/svgs/ic_fast_forward.svg" alt="다음" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="module" src="../js/player.js"></script>
+  </body>
+</html>
