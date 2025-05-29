@@ -4,9 +4,15 @@
 .
 ├── README.md               # 프로젝트 설명 파일
 ├── index.html              # 메인 페이지 HTML 파일
-├── variables.css           # CSS 변수 정의 파일
 ├── index.css               # 메인 페이지 스타일시트 파일
 ├── index.js                # 메인 페이지 자바스크립트 파일
+├── variables.css           # CSS 변수 정의 파일
+├── .gitignore              # Git 무시 파일 목록
+├── project/                # 프로젝트 관련 파일 폴더
+│   ├── js/                 # 자바스크립트 파일 폴더
+│   ├── css/                # 스타일시트 파일 폴더
+│   ├── html/               # HTML 파일 폴더
+│   └── assets/             # 이미지, 폰트 등 정적 에셋 파일 폴더
 ├── posts/                  # 챕터별 뷰어 관련 파일 폴더
 │   ├── index.html
 │   ├── css/
@@ -22,9 +28,7 @@
 │   ├── 07/
 │   ├── 08/
 │   └── 09/
-├── common/                 # 공통 모듈 또는 리소스 폴더
-│   ├── css/
-│   └── html/
-└── assets/                 # 이미지, 폰트 등 정적 에셋 파일 폴더
-    └── images/
+└── common/                 # 공통 모듈 또는 리소스 폴더
+    ├── css/
+    └── html/
 ```
