@@ -1,4 +1,3 @@
-import { MOOD } from "../constants.js";
 import youtubeAPI from "./youtube-api.js";
 
 export class PlaylistManager {
@@ -7,6 +6,8 @@ export class PlaylistManager {
     this.isLoading = false;
     this.currentMoodKey = null;
     this.intersectionObserver = null;
+    this.scrollCount = 0;
+    this.maxScrollCount = 3;
     this.setupIntersectionObserver();
   }
 
@@ -25,7 +26,13 @@ export class PlaylistManager {
 
   handleIntersection(entries) {
     entries.forEach((entry) => {
-      if (entry.isIntersecting && !this.isLoading && youtubeAPI.hasNextPage()) {
+      const canLoadMore =
+        entry.isIntersecting &&
+        !this.isLoading &&
+        youtubeAPI.hasNextPage() &&
+        this.scrollCount < this.maxScrollCount;
+
+      if (canLoadMore) {
         this.loadMorePlaylists();
       }
     });
@@ -65,7 +72,7 @@ export class PlaylistManager {
 
     const channel = document.createElement("div");
     channel.className = "album-channel";
-    channel.textContent = playlist.channelTitle || "채널 정보 없음";
+    channel.textContent = playlist.videoOwnerChannelTitle || "채널 정보 없음";
 
     const date = document.createElement("div");
     date.className = "album-date";
@@ -99,13 +106,13 @@ export class PlaylistManager {
 
   async loadMorePlaylists() {
     if (this.isLoading) return;
+    if (this.scrollCount >= this.maxScrollCount) return;
 
     this.isLoading = true;
-    const moodData = MOOD[this.currentMoodKey];
-    const topicId = moodData.topicId;
+    this.scrollCount += 1;
 
     try {
-      const response = await youtubeAPI.getMusicForMood(topicId);
+      const response = await youtubeAPI.getMusicForMood(this.currentMoodKey);
 
       if (!response || response.length === 0) {
         this.intersectionObserver.disconnect();
@@ -122,8 +129,10 @@ export class PlaylistManager {
       this.grid.appendChild(fragment);
 
       const lastElement = this.grid.lastElementChild;
-      if (lastElement) {
+      if (lastElement && this.scrollCount < this.maxScrollCount) {
         this.intersectionObserver.observe(lastElement);
+      } else if (this.scrollCount >= this.maxScrollCount) {
+        this.intersectionObserver.disconnect();
       }
     } catch (error) {
       console.error("Failed to load more tracks: ", error);
@@ -135,6 +144,7 @@ export class PlaylistManager {
   async initializePlaylists(moodKey) {
     this.currentMoodKey = moodKey;
     this.grid.innerHTML = '<div class="loading-message">로딩 중...</div>';
+    this.scrollCount = 0;
 
     try {
       const response = await youtubeAPI.getMusicForMood(moodKey, true);
@@ -156,7 +166,7 @@ export class PlaylistManager {
       this.grid.appendChild(fragment);
 
       const lastElement = this.grid.lastElementChild;
-      if (lastElement) {
+      if (lastElement && this.scrollCount < this.maxScrollCount) {
         this.intersectionObserver.observe(lastElement);
       }
     } catch (error) {

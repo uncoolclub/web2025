@@ -1,4 +1,5 @@
 import { MOOD } from "../constants.js";
+import Http from "./http.js";
 
 class YouTubeAPI {
   #API_KEY;
@@ -9,12 +10,8 @@ class YouTubeAPI {
     this.BASE_URL = "https://www.googleapis.com/youtube/v3";
     this.DEFAULT_PARAMS = {
       part: "snippet",
-      videoCategoryId: "10",
-      videoEmbeddable: "true",
-      type: "video",
+      type: "playlist",
       regionCode: "KR",
-      videoSyndicated: "true",
-      videoDuration: "medium",
     };
     this.#nextPageToken = null;
   }
@@ -48,62 +45,84 @@ class YouTubeAPI {
   }
 
   /**
-   * 토픽 ID로 음악을 검색합니다.
-   * @param {string} genre - 검색할 장르
-   * @param {number} maxResults - 최대 검색 결과 수 (기본값: 10)
-   * @returns {Promise<Array>} 검색된 음악 목록
+   * playlistId로 해당 플레이리스트의 영상 아이템들을 조회
    */
-  async #searchMusicByGenre(genre, maxResults = 10) {
+  async fetchPlaylistItems(playlistId, maxResults = 10) {
+    const url = `${
+      this.BASE_URL
+    }/playlistItems?part=snippet&maxResults=${maxResults}&playlistId=${playlistId}&key=${
+      this.#API_KEY
+    }`;
+
+    try {
+      const itemsData = await Http.get(url);
+
+      return itemsData.items.map((v) => ({
+        videoId: v.snippet.resourceId.videoId,
+        title: v.snippet.title,
+        thumbnail: v.snippet.thumbnails?.high?.url,
+        videoOwnerChannelTitle: v.snippet.videoOwnerChannelTitle,
+        publishedAt: v.snippet.publishedAt,
+        description: v.snippet.description,
+      }));
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async #searchPlaylistsByGenre(genre, maxResults = 1) {
     try {
       const params = this.#createSearchParams({
         maxResults: maxResults.toString(),
+        type: "playlist",
       });
-
-      const response = await fetch(
-        `${this.BASE_URL}/search?q=${encodeURIComponent(`${genre}`)}&${params}`
-      );
-
-      if (!response.ok) {
-        throw new Error("YouTube API 요청 실패");
-      }
-
-      const data = await response.json();
+      const url = `${this.BASE_URL}/search?q=${encodeURIComponent(
+        genre
+      )}&${params}`;
+      const data = await Http.get(url);
       this.#nextPageToken = data.nextPageToken;
 
-      return data.items.map((item) => ({
-        videoId: item.id.videoId,
-        title: item.snippet.title,
-        thumbnail: item.snippet.thumbnails.high.url,
-        channelTitle: item.snippet.channelTitle,
-        publishedAt: item.snippet.publishedAt,
-        description: item.snippet.description,
-      }));
+      const playlists = await Promise.all(
+        data.items.map(async (item) => {
+          const playlistId = item.id.playlistId;
+          const playlistInfo = {
+            playlistId,
+            title: item.snippet.title,
+            thumbnail: item.snippet.thumbnails.high.url,
+            channelTitle: item.snippet.channelTitle,
+            item: [],
+          };
+          playlistInfo.item = await this.fetchPlaylistItems(playlistId);
+
+          return playlistInfo;
+        })
+      );
+
+      return playlists.length > 0 ? playlists[0].item : [];
     } catch (error) {
-      console.error("음악 검색 중 오류 발생:", error);
+      console.error("플레이리스트 검색 중 오류:", error);
       throw error;
     }
   }
 
   /**
-   * 특정 기분에 맞는 음악을 검색합니다.
+   * 특정 기분에 맞는 플레이리스트를 검색합니다.
    * @param {string} moodKey - 기분 상태 키
    * @param {boolean} isNewSearch - 새로운 검색인지 여부
-   * @returns {Promise<Array>} 검색된 음악 목록
+   * @returns {Promise<Array>} 검색된 플레이리스트 목록
    */
   async getMusicForMood(moodKey, isNewSearch = false) {
     const genre = MOOD[moodKey].genre;
-
     if (!genre) {
       throw new Error("유효하지 않은 기분 상태입니다.");
     }
-
-    console.log(genre);
-
     if (isNewSearch) {
       this.#nextPageToken = null;
     }
 
-    return await this.#searchMusicByGenre(genre);
+    const items = await this.#searchPlaylistsByGenre(genre);
+
+    return items;
   }
 
   /**
