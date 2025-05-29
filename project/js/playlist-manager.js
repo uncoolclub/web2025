@@ -1,4 +1,5 @@
-import youtubeAPI from "./youtube-api.js";
+import youtubeAPI from "./common/youtube-api.js";
+import { SessionStorage } from "./common/session-storage.js";
 
 export class PlaylistManager {
   constructor() {
@@ -94,10 +95,13 @@ export class PlaylistManager {
 
     div.addEventListener("click", () => {
       if (playlist.videoId) {
-        window.open(
-          `https://www.youtube.com/watch?v=${playlist.videoId}`,
-          "_blank"
-        );
+        SessionStorage.set("currentVideo", {
+          videoId: playlist.videoId,
+          title: playlist.title,
+          channel: playlist.videoOwnerChannelTitle,
+          thumbnail: playlist.thumbnail,
+        });
+        window.location.href = "/project/html/player.html";
       }
     });
 

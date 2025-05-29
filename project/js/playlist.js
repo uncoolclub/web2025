@@ -1,6 +1,6 @@
 import { MOOD } from "./constants.js";
 import { SessionStorage } from "./common/session-storage.js";
-import { PlaylistManager } from "./common/playlist-manager.js";
+import { PlaylistManager } from "./playlist-manager.js";
 
 function getSelectedMoodKey() {
   return SessionStorage.get("userMoodSelection", {
