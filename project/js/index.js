@@ -109,7 +109,7 @@ function handleNextButtonClick() {
   nextButton.style.transform = "scale(0.98)";
 
   setTimeout(() => {
-    window.location.href = "/project/html/playlist.html";
+    window.location.href = "../html/playlist.html";
   }, 200);
 }
 
