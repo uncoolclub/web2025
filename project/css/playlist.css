@@ -46,8 +46,8 @@ body {
 }
 
 .profile-section-wrapper.sticky .profile-section {
-  margin: 0;
-  border-radius: 0 0 2.2rem 2.2rem;
+  margin: var(--spacing-lg);
+  border-radius: 2.2rem;
   padding: var(--spacing-md) var(--spacing-xl);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -134,11 +134,10 @@ body {
 .recent-albums-section {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem 1.2rem 2.2rem 1.2rem;
-  margin: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
+  padding: var(--spacing-sm);
+  margin: 0 var(--spacing-md);
   border-radius: 2.2rem;
   background-color: var(--primary-black);
-  /* 스크롤바 스타일링 */
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
@@ -163,41 +162,125 @@ body {
 .recent-title {
   color: var(--primary-white);
   font-size: 1.5rem;
-  margin-bottom: 1.2rem;
+  margin: var(--spacing-lg) 0 var(--spacing-md) 0;
   letter-spacing: 0.01em;
 }
 
 .albums-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
   padding-bottom: 1rem;
 }
 
 .album-cover {
-  background: var(--background);
-  border-radius: 1.1rem;
-  overflow: hidden;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  aspect-ratio: 1/1;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--background-alt);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  padding: var(--spacing-md);
   cursor: pointer;
+  min-height: 120px;
+  transition: border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .album-cover:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
 }
 
-.album-cover img {
+.album-img-wrapper {
+  position: relative;
+  width: 240px;
+  height: 130px;
+  margin-right: 1.2rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.album-img-wrapper img {
   width: 100%;
   height: 100%;
+  border-radius: 1rem;
   object-fit: cover;
+  z-index: 1;
 }
 
-/* 로딩 및 에러 메시지 스타일 */
+.album-img-dim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.697);
+  border-radius: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+
+.album-play-icon {
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px !important;
+  height: 48px !important;
+  z-index: 3 !important;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.album-cover:hover .album-img-dim,
+.album-cover:hover .album-play-icon {
+  opacity: 1;
+}
+
+.album-cover:hover .album-img-wrapper img {
+  border-radius: 0;
+}
+
+.album-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 0.3rem;
+  overflow: hidden;
+}
+
+.album-title {
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album-channel {
+  font-size: 0.95rem;
+  color: var(--text-color-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album-date {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}
+
+.album-description {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+}
+
 .loading-message,
 .error-message {
   color: var(--primary-white);
@@ -227,7 +310,7 @@ body {
   }
 
   .recent-albums-section {
-    margin: var(--spacing-sm);
+    margin: var(--spacing-md);
     padding: 1.2rem 0.5rem 1.5rem 0.5rem;
   }
 
