@@ -209,7 +209,7 @@ function renderPosts(filterFn = () => true, selectedChapter = null) {
 
     const postMeta = document.createElement("div");
     postMeta.className = "post-meta";
-    postMeta.setAttribute("lang", "ko");
+    postMeta.setAttribute("lang", "en");
     postMeta.textContent = date;
 
     const postTitle = document.createElement("h3");

@@ -1,4 +1,4 @@
-@import url("./variables.css");
+@import url("../../variables.css");
 @import url("../../common/css/main.css");
 @import url("../../common/css/markdown.css");
 
@@ -25,13 +25,6 @@ body {
   font-family: var(--font-english);
 }
 
-code,
-pre,
-.markdown-content code,
-.markdown-content pre,
-.code-result {
-  font-family: var(--font-mono) !important;
-}
 .main-header {
   background: var(--primary-white);
   border-bottom: var(--border-width) solid var(--border-color);
@@ -264,7 +257,7 @@ pre,
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
-  font-family: var(--font-korean);
+  font-family: var(--font-english);
 }
 
 .post-title {

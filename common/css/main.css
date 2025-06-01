@@ -44,7 +44,6 @@
   color: var(--text-gray);
   margin-top: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
-  font-family: var(--font-korean);
 }
 
 .post-list {
@@ -76,7 +75,6 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: var(--spacing-xs);
-  font-family: var(--font-korean);
 }
 
 .post-title {
@@ -96,7 +94,7 @@
   line-height: 1.4;
   text-transform: none;
   letter-spacing: normal;
-  font-family: var(--font-korean);
+  font-family: var(--font-english);
 }
 
 .content-wrapper {
