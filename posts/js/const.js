@@ -109,10 +109,10 @@ const BASE_POSTS = [
   },
   {
     title: "11 배열과 객체, 좀 더 깊게 살펴보기",
-    link: "./posts.html?file=11/",
+    link: "./posts.html?file=11/index.md",
     snippet:
       "배열과 객체에 대해 더 깊게 살펴보고, 배열과 객체의 차이점과 사용 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 18일 ~ 2025년 5월 25일",
     tags: ["Chapter 11", "객체"],
     chapter: "11",
   },
