@@ -100,10 +100,10 @@ const BASE_POSTS = [
   },
   {
     title: "10 효율적으로 문자열과 배열 활용하기",
-    link: "./posts.html?file=10/",
+    link: "./posts.html?file=10/index.md",
     snippet:
       "문자열과 배열을 효율적으로 활용하는 방법에 대해 알아봅니다. 문자열 조작과 배열의 사용 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 11일 ~ 2025년 5월 18일",
     tags: ["Chapter 10", "객체"],
     chapter: "10",
   },

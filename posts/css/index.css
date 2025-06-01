@@ -192,7 +192,9 @@ body {
 .content-area {
   flex: 1;
   background: #ffffff;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 60;
   overflow: hidden;
 }
 

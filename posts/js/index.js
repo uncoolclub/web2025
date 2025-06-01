@@ -182,6 +182,9 @@ function handleChapterSelect(chapter) {
     selectedItem.classList.add("active");
   }
 
+  // 챕터 이동 시 스크롤 위치 리셋
+  window.scrollTo(0, 0);
+
   renderPosts((post) => post.tags.includes(chapter), chapter);
   chapterFilter.value = chapter;
 }
@@ -216,6 +219,7 @@ function renderPosts(filterFn = () => true, selectedChapter = null) {
     postItem.style.animationDelay = `${index * 0.05}s`;
 
     postItem.onclick = () => {
+      window.scrollTo(0, 0);
       if (link && link !== "#") {
         if (type === "practice") {
           loadPracticeContent(link, title);
