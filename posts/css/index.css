@@ -85,18 +85,16 @@ body {
   display: flex;
   max-width: 1400px;
   margin: 0 auto;
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
 }
+
 .sidebar {
   width: 400px;
   background: #e5e5e5;
   padding: 40px;
   overflow-y: auto;
-  max-height: calc(100vh - 80px);
-}
-
-.filter-section {
-  margin-bottom: 40px;
+  min-height: 100vh;
+  transition: all 0.3s ease;
 }
 
 .filter-title {
@@ -107,11 +105,39 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-family: var(--font-english);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter-title::after {
+  content: "▼";
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.filter-title.collapsed::after {
+  transform: rotate(-90deg);
+}
+
+.filter-content {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.filter-content.collapsed {
+  max-height: 0;
+}
+
+.filter-content.expanded ~ .chapter-list {
+  margin-bottom: 40px;
 }
 
 .filter-dropdown select {
   width: 100%;
   padding: 12px;
+  border: none;
   border: 1px solid var(--primary-black);
   background: #ffffff;
   font-size: 14px;
@@ -121,14 +147,8 @@ body {
   cursor: pointer;
   outline: none;
   font-family: var(--font-korean);
-}
-
-.filter-dropdown select:focus {
-  border-width: 2px;
-}
-
-.chapter-list {
-  border-top: 1px solid var(--primary-black);
+  box-shadow: none;
+  appearance: none;
 }
 
 .chapter-item {
@@ -285,6 +305,14 @@ body {
     padding: 20px;
   }
 
+  .filter-content {
+    max-height: 0;
+  }
+
+  .filter-content.expanded {
+    max-height: 1000px;
+  }
+
   .content-header,
   .viewer-header {
     padding: 20px;
@@ -333,4 +361,8 @@ body {
   .markdown-content h2 {
     font-size: 1.25rem;
   }
+}
+
+.filter-title.collapsed {
+  margin-bottom: 0;
 }

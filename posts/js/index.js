@@ -148,6 +148,24 @@ function renderChapterList() {
       handleChapterSelect(chapter);
     });
   });
+
+  // 모바일에서 필터 섹션 접기/펼치기 기능 추가
+  const filterTitle = document.querySelector(".filter-title");
+  const filterContent = document.querySelector(".filter-content");
+
+  if (filterTitle && filterContent) {
+    filterTitle.addEventListener("click", () => {
+      filterTitle.classList.toggle("collapsed");
+      filterContent.classList.toggle("collapsed");
+      filterContent.classList.toggle("expanded");
+    });
+
+    // 모바일 화면에서 초기 상태 설정
+    if (window.innerWidth <= 1024) {
+      filterTitle.classList.add("collapsed");
+      filterContent.classList.add("collapsed");
+    }
+  }
 }
 
 function handleChapterSelect(chapter) {
@@ -400,9 +418,33 @@ chapterFilter.addEventListener("change", (e) => {
   }
 });
 
+// 사이드바 접기/펼치기 기능 (페이지 로드 시 1회만 바인딩)
+function setupSidebarToggle() {
+  const filterTitle = document.querySelector(".filter-title");
+  const filterContent = document.querySelector(".filter-content");
+  if (filterTitle && filterContent) {
+    filterTitle.addEventListener("click", () => {
+      filterTitle.classList.toggle("collapsed");
+      filterContent.classList.toggle("collapsed");
+      filterContent.classList.toggle("expanded");
+    });
+
+    // 모바일 화면에서 초기 상태 설정
+    if (window.innerWidth <= 1024) {
+      filterTitle.classList.add("collapsed");
+      filterContent.classList.add("collapsed");
+    } else {
+      filterTitle.classList.remove("collapsed");
+      filterContent.classList.remove("collapsed");
+    }
+  }
+}
+
 async function init() {
   await initShiki();
   setupMarkdownIt();
+
+  setupSidebarToggle();
 
   const checkPosts = () => {
     if (window.POSTS && window.POSTS.length > 0) {
