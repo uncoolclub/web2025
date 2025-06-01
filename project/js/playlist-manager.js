@@ -101,7 +101,7 @@ export class PlaylistManager {
           channel: playlist.videoOwnerChannelTitle,
           thumbnail: playlist.thumbnail,
         });
-        window.location.href = "/project/html/player.html";
+        window.location.href = "../html/player.html";
       }
     });
 
