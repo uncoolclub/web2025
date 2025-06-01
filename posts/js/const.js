@@ -118,10 +118,10 @@ const BASE_POSTS = [
   },
   {
     title: "12 HTTP 통신과 JSON",
-    link: "./posts.html?file=12/",
+    link: "./posts.html?file=12/index.md",
     snippet:
       "HTTP 통신과 JSON에 대해 알아봅니다. 웹 페이지와 서버 간의 통신 방법과 JSON의 형식과 사용 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 25일 ~ 2025년 6월 1일",
     tags: ["Chapter 12"],
     chapter: "12",
   },
