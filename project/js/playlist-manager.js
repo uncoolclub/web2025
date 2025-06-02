@@ -4,6 +4,7 @@ import { SessionStorage } from "./common/session-storage.js";
 export class PlaylistManager {
   constructor() {
     this.grid = document.querySelector(".albums-grid");
+    this.loadingSpinner = document.getElementById("loading-spinner");
     this.isLoading = false;
     this.currentMoodKey = null;
     this.intersectionObserver = null;
@@ -57,7 +58,7 @@ export class PlaylistManager {
 
     const playIcon = document.createElement("img");
     playIcon.className = "album-play-icon";
-    playIcon.src = "/project/assets/svgs/ic_play.svg";
+    playIcon.src = "../assets/svgs/ic_play.svg";
     playIcon.alt = "Play";
 
     imgWrapper.appendChild(img);
@@ -147,8 +148,11 @@ export class PlaylistManager {
 
   async initializePlaylists(moodKey) {
     this.currentMoodKey = moodKey;
-    this.grid.innerHTML = '<div class="loading-message">로딩 중...</div>';
     this.scrollCount = 0;
+
+    if (this.loadingSpinner) {
+      this.loadingSpinner.style.display = "flex";
+    }
 
     try {
       const response = await youtubeAPI.getMusicForMood(moodKey, true);
@@ -167,6 +171,10 @@ export class PlaylistManager {
         fragment.appendChild(element);
       });
 
+      if (this.loadingSpinner) {
+        this.loadingSpinner.style.display = "none";
+      }
+
       this.grid.appendChild(fragment);
 
       const lastElement = this.grid.lastElementChild;
@@ -184,6 +192,10 @@ export class PlaylistManager {
 
       this.grid.innerHTML =
         '<div class="error-message">음악을 불러오지 못했습니다.</div>';
+    } finally {
+      if (this.loadingSpinner) {
+        this.loadingSpinner.style.display = "none";
+      }
     }
   }
 }
