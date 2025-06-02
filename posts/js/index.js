@@ -5,6 +5,7 @@ const contentTitle = document.getElementById("content-title");
 const markdownViewer = document.getElementById("markdown-viewer");
 const markdownContent = document.getElementById("markdown-content");
 const backBtn = document.getElementById("back-btn");
+const loadingSpinner = document.getElementById("loading-spinner");
 
 let POSTS = window.POSTS || [];
 let ChapterUtils = window.ChapterUtils || null;
@@ -210,7 +211,9 @@ function renderPosts(filterFn = () => true, selectedChapter = null) {
     contentTitle.innerHTML = `<span lang="en">CHAPTERS (${filteredPosts.length} posts)</span>`;
   }
 
+  loadingSpinner.style.display = "none";
   postListContainer.innerHTML = "";
+  postListContainer.appendChild(loadingSpinner);
 
   filteredPosts.forEach(({ title, link, snippet, date, tags, type }, index) => {
     const postItem = document.createElement("div");
