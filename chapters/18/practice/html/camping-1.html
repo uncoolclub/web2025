@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API에서 자료 가져오기</title>
+  </head>
+  <body>
+    <script>
+      const url =
+        "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=230&pageNo=1&MobileOS=ETC&MobileApp=testAPP&serviceKey=FSYGYSHOVs2%2BJnU1JYGsvu95uuPcadpsYhM84SzqBz17%2BOWXXCO4eHbhLP4efKKIz8PLbyO6tf93i5ajseadFg%3D%3D&_type=json";
+
+      fetch(url)
+        .then((result) => result.json())
+        .then((json) => {
+          const data = json.response.body.items.item;
+          console.log(data);
+        });
+    </script>
+  </body>
+</html>

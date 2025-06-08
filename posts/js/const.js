@@ -103,7 +103,7 @@ const BASE_POSTS = [
     link: "./posts.html?file=10/index.md",
     snippet:
       "문자열과 배열을 효율적으로 활용하는 방법에 대해 알아봅니다. 문자열 조작과 배열의 사용 방법을 배웁니다.",
-    date: "2025년 5월 11일 ~ 2025년 5월 18일",
+    date: "2025년 5월 4일 ~ 2025년 5월 12일",
     tags: ["Chapter 10", "객체"],
     chapter: "10",
   },
@@ -112,7 +112,7 @@ const BASE_POSTS = [
     link: "./posts.html?file=11/index.md",
     snippet:
       "배열과 객체에 대해 더 깊게 살펴보고, 배열과 객체의 차이점과 사용 방법을 배웁니다.",
-    date: "2025년 5월 18일 ~ 2025년 5월 25일",
+    date: "2025년 5월 4일 ~ 2025년 5월 12일",
     tags: ["Chapter 11", "객체"],
     chapter: "11",
   },
@@ -121,52 +121,34 @@ const BASE_POSTS = [
     link: "./posts.html?file=12/index.md",
     snippet:
       "HTTP 통신과 JSON에 대해 알아봅니다. 웹 페이지와 서버 간의 통신 방법과 JSON의 형식과 사용 방법을 배웁니다.",
-    date: "2025년 5월 25일 ~ 2025년 6월 1일",
+    date: "2025년 5월 6일 ~ 2025년 5월 19일",
     tags: ["Chapter 12"],
     chapter: "12",
   },
   {
     title: "13 비동기 프로그래밍",
-    link: "./posts.html?file=13/",
+    link: "./posts.html?file=13/index.md",
     snippet:
       "비동기 프로그래밍에 대해 알아봅니다. 비동기 프로그래밍의 개념과 장단점, 그리고 사용 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 13일 ~ 2025년 5월 26일",
     tags: ["Chapter 13"],
     chapter: "13",
   },
   {
     title: "14 캔버스로 도형, 텍스트, 이미지 그리기",
-    link: "./posts.html?file=14/",
+    link: "./posts.html?file=14/index.md",
     snippet:
       "캔버스를 활용하여 도형, 텍스트, 이미지를 그리는 방법에 대해 알아봅니다. 캔버스 API를 사용하여 그래픽을 그리는 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 11일 ~ 2025년 5월 26일",
     tags: ["Chapter 14", "캔버스"],
     chapter: "14",
-  },
-  {
-    title: "15 캔버스로 그래픽 요소 다루기",
-    link: "./posts.html?file=15/",
-    snippet:
-      "캔버스를 활용하여 그래픽 요소를 다루는 방법에 대해 알아봅니다. 캔버스 API를 사용하여 그래픽을 다루는 방법을 배웁니다.",
-    date: "⛔ Not yet",
-    tags: ["Chapter 15", "캔버스"],
-    chapter: "15",
-  },
-  {
-    title: "16 캔버스로 애니메이션 실행하기",
-    link: "./posts.html?file=16/",
-    snippet:
-      "캔버스를 활용하여 애니메이션을 실행하는 방법에 대해 알아봅니다. 캔버스 API를 사용하여 애니메이션을 만드는 방법을 배웁니다.",
-    date: "⛔ Not yet",
-    tags: ["Chapter 16", "캔버스"],
-    chapter: "16",
   },
   {
     title: "17 웹 API 활용하기",
     link: "./posts.html?file=17/",
     snippet:
       "웹 API에 대해 알아봅니다. 웹 API의 개념과 종류, 그리고 웹 API를 활용하여 웹 페이지를 개선하는 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 14일 ~ 2025년 6월 2일",
     tags: ["Chapter 17", "API"],
     chapter: "17",
   },
@@ -175,7 +157,7 @@ const BASE_POSTS = [
     link: "./posts.html?file=18/",
     snippet:
       "공개 API에 대해 알아봅니다. 공개 API의 개념과 종류, 그리고 공개 API를 활용하여 웹 페이지를 개선하는 방법을 배웁니다.",
-    date: "⛔ Not yet",
+    date: "2025년 5월 14일 ~ 2025년 6월 9일",
     tags: ["Chapter 18", "API"],
     chapter: "18",
   },
