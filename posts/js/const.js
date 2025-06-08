@@ -168,10 +168,22 @@ const BASE_POSTS = [
  */
 const ChapterUtils = {
   /**
-   * BASE_POSTS에서 모든 챕터 정보를 추출
+   * 실제 사용 가능한 챕터 정보를 POSTS 배열에서 추출
    * @returns {Array} 정렬된 챕터 배열
    */
   getAllChapters() {
+    // 필터링된 POSTS 배열에서 챕터를 추출 (일반 포스트 + practice 포스트)
+    const sourceArray =
+      window.POSTS && window.POSTS.length > 0 ? window.POSTS : BASE_POSTS;
+    const chapters = [...new Set(sourceArray.map((post) => post.chapter))];
+    return chapters.sort((a, b) => parseInt(a) - parseInt(b));
+  },
+
+  /**
+   * BASE_POSTS에서 모든 챕터 정보를 추출 (필터링 전)
+   * @returns {Array} 정렬된 챕터 배열
+   */
+  getAllBaseChapters() {
     const chapters = [...new Set(BASE_POSTS.map((post) => post.chapter))];
     return chapters.sort((a, b) => parseInt(a) - parseInt(b));
   },
@@ -222,7 +234,7 @@ const ChapterUtils = {
  */
 async function detectChaptersWithPractice() {
   const chaptersWithPractice = [];
-  const allChapters = ChapterUtils.getAllChapters();
+  const allChapters = ChapterUtils.getAllBaseChapters();
 
   for (const chapterNum of allChapters) {
     try {
@@ -240,13 +252,42 @@ async function detectChaptersWithPractice() {
 }
 
 /**
+ * index.md 파일이 있는 챕터들을 자동으로 감지하는 함수
+ * @returns {Promise<Array>} index.md 파일이 있는 챕터 번호 배열
+ */
+async function detectChaptersWithIndex() {
+  const chaptersWithIndex = [];
+  const allChapters = ChapterUtils.getAllBaseChapters();
+
+  for (const chapterNum of allChapters) {
+    try {
+      const indexPath = `../chapters/${chapterNum}/index.md`;
+      const response = await fetch(indexPath);
+      if (response.ok) {
+        chaptersWithIndex.push(chapterNum);
+      }
+    } catch (error) {
+      console.log(`${chapterNum}장에는 index.md 파일이 없습니다.`);
+    }
+  }
+
+  return chaptersWithIndex;
+}
+
+/**
  * 포스트 데이터를 생성하는 함수
  * @returns {Promise<Array>} 생성된 포스트 배열
  */
 async function generatePosts() {
-  const posts = [...BASE_POSTS];
+  const chaptersWithIndex = await detectChaptersWithIndex();
   const chaptersWithPractice = await detectChaptersWithPractice();
 
+  // index.md가 있는 챕터의 일반 포스트만 포함
+  const posts = BASE_POSTS.filter((post) =>
+    chaptersWithIndex.includes(post.chapter)
+  );
+
+  // practice 폴더가 있는 모든 챕터에 practice 포스트 추가
   chaptersWithPractice.forEach((chapterNum) => {
     const basePost = BASE_POSTS.find((post) => post.chapter === chapterNum);
 
