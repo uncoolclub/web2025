@@ -149,24 +149,6 @@ function renderChapterList() {
       handleChapterSelect(chapter);
     });
   });
-
-  // 모바일에서 필터 섹션 접기/펼치기 기능 추가
-  const filterTitle = document.querySelector(".filter-title");
-  const filterContent = document.querySelector(".filter-content");
-
-  if (filterTitle && filterContent) {
-    filterTitle.addEventListener("click", () => {
-      filterTitle.classList.toggle("collapsed");
-      filterContent.classList.toggle("collapsed");
-      filterContent.classList.toggle("expanded");
-    });
-
-    // 모바일 화면에서 초기 상태 설정
-    if (window.innerWidth <= 1024) {
-      filterTitle.classList.add("collapsed");
-      filterContent.classList.add("collapsed");
-    }
-  }
 }
 
 function handleChapterSelect(chapter) {
@@ -429,33 +411,98 @@ chapterFilter.addEventListener("change", (e) => {
 function setupSidebarToggle() {
   const filterTitle = document.querySelector(".filter-title");
   const filterContent = document.querySelector(".filter-content");
-  if (filterTitle && filterContent) {
-    filterTitle.addEventListener("click", () => {
-      filterTitle.classList.toggle("collapsed");
-      filterContent.classList.toggle("collapsed");
-      filterContent.classList.toggle("expanded");
+  const sidebar = document.querySelector(".sidebar");
+
+  if (filterTitle && filterContent && sidebar) {
+    // 기존 이벤트 리스너 제거
+    const newFilterTitle = filterTitle.cloneNode(true);
+    filterTitle.parentNode.replaceChild(newFilterTitle, filterTitle);
+
+    // 새로운 이벤트 리스너 추가
+    newFilterTitle.addEventListener("click", () => {
+      const isCurrentlyCollapsed =
+        newFilterTitle.classList.contains("collapsed");
+
+      if (isCurrentlyCollapsed) {
+        // 펼치기
+        newFilterTitle.classList.remove("collapsed");
+        filterContent.classList.remove("collapsed");
+        filterContent.classList.add("expanded");
+        sidebar.classList.remove("collapsed-state");
+        sidebar.classList.add("expanded-state");
+      } else {
+        // 접기
+        newFilterTitle.classList.add("collapsed");
+        filterContent.classList.add("collapsed");
+        filterContent.classList.remove("expanded");
+        sidebar.classList.add("collapsed-state");
+        sidebar.classList.remove("expanded-state");
+      }
     });
 
-    // 모바일 화면에서 초기 상태 설정
-    if (window.innerWidth <= 1024) {
-      filterTitle.classList.add("collapsed");
+    // 화면 크기에 따른 초기 상태 설정
+    const isMobile = window.innerWidth <= 1024;
+
+    if (isMobile) {
+      // 모바일: 기본적으로 접힌 상태
+      newFilterTitle.classList.add("collapsed");
       filterContent.classList.add("collapsed");
+      filterContent.classList.remove("expanded");
+      sidebar.classList.add("collapsed-state");
+      sidebar.classList.remove("expanded-state");
     } else {
-      filterTitle.classList.remove("collapsed");
+      // 데스크톱: 기본적으로 펼쳐진 상태
+      newFilterTitle.classList.remove("collapsed");
       filterContent.classList.remove("collapsed");
+      filterContent.classList.add("expanded");
+      sidebar.classList.remove("collapsed-state");
+      sidebar.classList.add("expanded-state");
     }
   }
 }
+
+// 윈도우 리사이즈 이벤트 리스너 추가
+function handleResize() {
+  const filterTitle = document.querySelector(".filter-title");
+  const filterContent = document.querySelector(".filter-content");
+  const sidebar = document.querySelector(".sidebar");
+
+  if (filterTitle && filterContent && sidebar) {
+    const isMobile = window.innerWidth <= 1024;
+
+    if (isMobile) {
+      // 모바일로 전환 시 접힌 상태로
+      filterTitle.classList.add("collapsed");
+      filterContent.classList.add("collapsed");
+      filterContent.classList.remove("expanded");
+      sidebar.classList.add("collapsed-state");
+      sidebar.classList.remove("expanded-state");
+    } else {
+      // 데스크톱으로 전환 시 펼쳐진 상태로
+      filterTitle.classList.remove("collapsed");
+      filterContent.classList.remove("collapsed");
+      filterContent.classList.add("expanded");
+      sidebar.classList.remove("collapsed-state");
+      sidebar.classList.add("expanded-state");
+    }
+  }
+}
+
+// 리사이즈 이벤트 리스너 등록
+window.addEventListener("resize", handleResize);
 
 async function init() {
   await initShiki();
   setupMarkdownIt();
 
+  // 먼저 사이드바 토글 설정
   setupSidebarToggle();
 
   const checkPosts = () => {
     if (window.POSTS && window.POSTS.length > 0) {
       updatePosts();
+      // 포스트 로드 후 사이드바 상태 재설정
+      setupSidebarToggle();
     } else {
       setTimeout(checkPosts, 100);
     }
